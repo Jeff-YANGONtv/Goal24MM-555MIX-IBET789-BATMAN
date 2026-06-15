@@ -5,12 +5,20 @@ import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
+import TeamPage from "./pages/TeamPage";
+import LeaguePage from "./pages/LeaguePage";
+import WorldCupPage from "./pages/WorldCupPage";
+import BettingPage from "./pages/BettingPage";
 
 
 function Router() {
   return (
     <Switch>
-      <Route path={"/"} component={Home} />
+      <Route path={"/ "} component={Home} />
+      <Route path={"/team/:slug"} component={({ params }) => <TeamPage slug={params.slug} />} />
+      <Route path={"/league/:slug"} component={({ params }) => <LeaguePage slug={params.slug} />} />
+      <Route path={"/worldcup/:slug"} component={({ params }) => <WorldCupPage slug={params.slug} />} />
+      <Route path={"/bet/:slug"} component={({ params }) => <BettingPage slug={params.slug} />} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />
