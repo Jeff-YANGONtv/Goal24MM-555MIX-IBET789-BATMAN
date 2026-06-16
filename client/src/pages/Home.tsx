@@ -143,9 +143,9 @@ export default function Home() {
                       key={platform.id}
                       className="embla__slide flex-[0_0_100%] md:flex-[0_0_calc(50%-1rem)] lg:flex-[0_0_calc(33.333%-1.33rem)] min-w-0"
                     >
-                      <div className={`group bg-gray-800/50 backdrop-blur-sm p-5 rounded-xl border border-gray-700 hover:${colors.border} transition-all duration-300 hover:-translate-y-2 flex flex-col h-full shadow-xl overflow-hidden relative`}>
+                      <div className={`group bg-gray-800/50 backdrop-blur-sm p-3 rounded-xl border border-gray-700 hover:${colors.border} transition-all duration-300 hover:-translate-y-2 flex flex-col h-full shadow-xl overflow-hidden relative`}>
                         {/* App Icon Frame (512x512 ratio) */}
-                        <div className="mb-6 relative flex items-center justify-center">
+                        <div className="mb-3 relative flex items-center justify-center">
                           <div className={`w-32 h-32 rounded-2xl border-2 border-${platform.color}-500/30 flex items-center justify-center bg-gray-900/50`}>
                             <img 
                               src={platform.logo} 
@@ -154,15 +154,15 @@ export default function Home() {
                             />
                           </div>
                         </div>
-                        <h3 className={`text-lg font-bold mb-3 text-white ${colors.hover} transition-colors`}>
+                        <h3 className={`text-lg font-bold mb-2 text-white ${colors.hover} transition-colors`}>
                           {platform.name}
                         </h3>
-                        <p className="text-gray-400 mb-3 leading-relaxed flex-grow text-sm">
+                        <p className="text-gray-400 mb-2 leading-relaxed flex-grow text-sm">
                           {platform.description}
                         </p>
                         
                         {/* Unit Price Information */}
-                        <div className="mb-4 p-3 bg-gray-900/50 rounded-lg border border-gray-700">
+                        <div className="mb-2 p-2 bg-gray-900/50 rounded-lg border border-gray-700">
                           <p className="text-xs text-gray-300 font-semibold">
                             {platform.unit}
                           </p>
@@ -172,7 +172,7 @@ export default function Home() {
                         </div>
 
                         {/* Tags */}
-                        <div className="flex flex-wrap gap-2">
+                        <div className="flex flex-wrap gap-1">
                           {platform.tags.map((tag) => (
                             <span 
                               key={tag}
