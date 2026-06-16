@@ -1,9 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Send, Phone } from "lucide-react";
+import { Helmet } from "react-helmet-async";
 import Navbar from "../components/Navbar";
 
 export default function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
+
+  // SEO Keywords for Goal24MM, 555mix, ibet789, batman, slot
+  const seoKeywords = "Goal24MM, 555mix, ibet789, batman, slot, online gaming, betting platform, sports betting, casino games, online slots";
+  const seoDescription = "Goal24MM - Best online gaming platform featuring 555mix, ibet789, batman slots and more. Fast, secure, and trusted betting experience with multiple payment methods.";
 
   const slides = [
     "https://user13973.na.imgto.link/public/20260614/1000030815.avif",
@@ -53,14 +58,29 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-[#05070a] text-white overflow-x-hidden">
+      {/* SEO Meta Tags */}
+      <Helmet>
+        <title>Goal24MM - 555mix, ibet789, batman Slots & Online Gaming</title>
+        <meta name="description" content={seoDescription} />
+        <meta name="keywords" content={seoKeywords} />
+        <link rel="canonical" href="https://goal24mm-555mix-ibet-batman.vercel.app/" />
+        <meta property="og:title" content="Goal24MM - Best Online Gaming & Betting Platform" />
+        <meta property="og:description" content={seoDescription} />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://goal24mm-555mix-ibet-batman.vercel.app/" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Goal24MM - 555mix, ibet789, batman" />
+        <meta name="twitter:description" content={seoDescription} />
+      </Helmet>
       {/* Navigation Bar */}
       <Navbar />
 
       {/* Main Content */}
       <main className="relative z-10 pt-20">
-        {/* Header Title */}
+        {/* Header Title - SEO Optimized */}
         <div className="text-center pt-4 pb-2">
-          <h1 className="text-2xl font-bold text-yellow-500">Goal 24 MM</h1>
+          <h1 className="text-2xl font-bold text-yellow-500">Goal24MM - 555mix, ibet789, batman Online Gaming</h1>
+          <p className="text-sm text-gray-400 mt-2">Trusted Slot Games & Betting Platform</p>
         </div>
 
         {/* Header Slider */}
@@ -83,10 +103,10 @@ export default function Home() {
           </div>
         </header>
 
-        {/* Join Section */}
+        {/* Join Section - SEO Rich */}
         <div className="flex justify-center items-center gap-3 mt-3 px-4 mb-6 flex-wrap">
           <h2 className="text-xs font-bold animate-pulse text-white">
-            Join our promotion & news channel
+            Join Goal24MM - Get 555mix, ibet789, batman Updates & Promotions
           </h2>
           <a
             href="https://t.me/modernsportsnews"
@@ -98,10 +118,10 @@ export default function Home() {
           </a>
         </div>
 
-        {/* Payment Icons */}
+        {/* Payment Icons - SEO Rich */}
         <div className="max-w-4xl mx-auto mt-6 px-4 text-center mb-8">
           <h3 className="font-bold mb-3 text-gray-500 text-[10px]">
-            SUPPORTED PAYMENT
+            SUPPORTED PAYMENT METHODS - Secure & Fast Transactions
           </h3>
           <div className="flex justify-center flex-wrap gap-3">
             {paymentMethods.map((method, index) => (
@@ -115,8 +135,9 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Game Rates */}
+        {/* Game Rates - SEO Optimized */}
         <div className="max-w-3xl mx-auto px-4 mt-6 mb-8 flex flex-row justify-center gap-3 flex-wrap">
+          <h2 className="w-full text-center text-sm font-bold text-yellow-400 mb-4">Popular Gaming Platforms: 555mix, ibet789, batman Slots</h2>
           {platforms.map((platform) => (
             <div
               key={platform.id}
@@ -124,7 +145,7 @@ export default function Home() {
             >
               <img
                 src={platform.logo}
-                alt={platform.name}
+                alt={`${platform.name} - Online Slot Games`}
                 className="h-8 w-auto mb-1 object-contain"
               />
               <h3 className="text-[9px] font-bold text-gray-400">
@@ -137,11 +158,12 @@ export default function Home() {
           ))}
         </div>
 
-        {/* Contact Section */}
+        {/* Contact Section - SEO Optimized */}
         <div className="max-w-sm mx-auto px-4 text-center pb-12">
           <h2 className="text-sm font-bold text-yellow-400 mb-4">
-            အကောင့်ဖွင့်ကစားလိုပါကဆက်သွယ်ရန်
+            Start Playing Goal24MM - 555mix, ibet789, batman Now!
           </h2>
+          <p className="text-xs text-gray-400 mb-4">Open Account & Play Online Slots & Betting Games</p>
           <div className="flex justify-center gap-4 flex-wrap">
             <a
               href="viber://add?number=+959777433266"

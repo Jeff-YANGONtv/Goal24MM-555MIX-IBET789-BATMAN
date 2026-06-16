@@ -1,6 +1,7 @@
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Helmet, HelmetProvider } from "react-helmet-async";
+import { generateOrganizationSchema } from "@/lib/seo";
 
 import NotFound from "@/pages/NotFound";
 import { Route, Switch } from "wouter";
@@ -14,8 +15,21 @@ import BettingPage from "./pages/BettingPage";
 
 
 function Router() {
+  const organizationSchema = generateOrganizationSchema();
+  
   return (
     <HelmetProvider>
+      <Helmet>
+        {/* Global Organization Schema */}
+        <script type="application/ld+json">
+          {JSON.stringify(organizationSchema)}
+        </script>
+        {/* Global Meta Tags */}
+        <meta name="robots" content="index, follow" />
+        <meta name="language" content="English" />
+        <meta name="revisit-after" content="7 days" />
+        <meta name="author" content="Goal24MM" />
+      </Helmet>
       <Switch>
       <Route path={"/"} component={() => (
             <>
