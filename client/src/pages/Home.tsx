@@ -33,8 +33,7 @@ export default function Home() {
         <div className="container mx-auto flex justify-between items-center">
           <span className="text-2xl font-bold text-yellow-500">Goal24MM</span>
           <div className="space-x-6">
-            <a href="#features" className="hover:text-yellow-500 transition">Services</a>
-            <a href="#" className="bg-yellow-500 text-gray-900 px-6 py-2 rounded-full font-bold hover:bg-yellow-400 transition">Play Now</a>
+            {/* Removed Services and Play Now links */}
           </div>
         </div>
       </nav>
@@ -73,13 +72,13 @@ export default function Home() {
       {/* Features/Platforms Section */}
       <section id="features" className="py-20">
         <div className="container mx-auto px-6">
-          <h2 className="text-3xl font-bold text-center mb-16">Our Featured Platforms</h2>
+          <h2 className="text-xl font-bold text-center mb-12">Our Featured Platforms</h2>
           
           <div className="space-y-12">
             {/* 555MIX Block */}
             <div id="features/555mix" className="bg-gray-800 p-8 rounded-xl border border-gray-700 hover:border-yellow-500 transition scroll-mt-24">
-              <h3 className="text-3xl font-bold mb-4 text-yellow-500">555MIX</h3>
-              <p className="text-lg text-gray-300 mb-4">Premium gaming experience with high-speed performance and dedicated support. Enjoy a wide range of sports betting and live casino options tailored for elite players.</p>
+              <h3 className="text-xl font-bold mb-3 text-yellow-500">555MIX</h3>
+              <p className="text-sm text-gray-300 mb-4">Premium gaming experience with high-speed performance and dedicated support. Enjoy a wide range of sports betting and live casino options tailored for elite players.</p>
               <div className="flex gap-4">
                 <span className="bg-yellow-500/10 text-yellow-500 px-3 py-1 rounded-full text-sm font-medium">Fast Payouts</span>
                 <span className="bg-yellow-500/10 text-yellow-500 px-3 py-1 rounded-full text-sm font-medium">24/7 Support</span>
@@ -88,8 +87,8 @@ export default function Home() {
 
             {/* IBET789 Block */}
             <div id="features/ibet789" className="bg-gray-800 p-8 rounded-xl border border-gray-700 hover:border-yellow-500 transition scroll-mt-24">
-              <h3 className="text-3xl font-bold mb-4 text-yellow-500">IBET789</h3>
-              <p className="text-lg text-gray-300 mb-4">Your trusted platform for live sports betting and casino games. IBET789 offers competitive odds and a seamless interface for the best betting experience in Myanmar.</p>
+              <h3 className="text-xl font-bold mb-3 text-yellow-500">IBET789</h3>
+              <p className="text-sm text-gray-300 mb-4">Your trusted platform for live sports betting and casino games. IBET789 offers competitive odds and a seamless interface for the best betting experience in Myanmar.</p>
               <div className="flex gap-4">
                 <span className="bg-yellow-500/10 text-yellow-500 px-3 py-1 rounded-full text-sm font-medium">Live Betting</span>
                 <span className="bg-yellow-500/10 text-yellow-500 px-3 py-1 rounded-full text-sm font-medium">Best Odds</span>
@@ -98,8 +97,8 @@ export default function Home() {
 
             {/* SLOT Block */}
             <div id="features/slot" className="bg-gray-800 p-8 rounded-xl border border-gray-700 hover:border-yellow-500 transition scroll-mt-24">
-              <h3 className="text-3xl font-bold mb-4 text-yellow-500">SLOT & BATMAN</h3>
-              <p className="text-lg text-gray-300 mb-4">Experience cutting-edge gaming with exclusive slot titles and community features. Our Batman platform provides the most exciting slot games with high win rates and massive jackpots.</p>
+              <h3 className="text-xl font-bold mb-3 text-yellow-500">SLOT & BATMAN</h3>
+              <p className="text-sm text-gray-300 mb-4">Experience cutting-edge gaming with exclusive slot titles and community features. Our Batman platform provides the most exciting slot games with high win rates and massive jackpots.</p>
               <div className="flex gap-4">
                 <span className="bg-yellow-500/10 text-yellow-500 px-3 py-1 rounded-full text-sm font-medium">Big Jackpots</span>
                 <span className="bg-yellow-500/10 text-yellow-500 px-3 py-1 rounded-full text-sm font-medium">Daily Bonuses</span>
@@ -153,8 +152,8 @@ export default function Home() {
       {/* Call to Action Section (New) */}
       <section className="bg-yellow-500 text-gray-900 py-20 text-center">
         <div className="container mx-auto px-6">
-          <h2 className="text-4xl font-extrabold mb-4">Ready to Play?</h2>
-          <p className="text-xl mb-8 max-w-2xl mx-auto">Join Goal24MM today and elevate your gaming experience. Fast, secure, and rewarding.</p>
+          <h2 className="text-2xl font-extrabold mb-3">Ready to Play?</h2>
+          <p className="text-base mb-6 max-w-2xl mx-auto">Join Goal24MM today and elevate your gaming experience. Fast, secure, and rewarding.</p>
           <a href="#" className="bg-gray-900 text-yellow-500 px-10 py-4 rounded-full text-xl font-bold hover:bg-gray-700 transition">Sign Up Now</a>
         </div>
       </section>
