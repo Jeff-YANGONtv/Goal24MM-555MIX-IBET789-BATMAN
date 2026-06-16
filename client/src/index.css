@@ -55,6 +55,19 @@
   animation: marquee 20s linear infinite;
 }
 
+@keyframes colorBlink {
+  0%, 100% {
+    color: #ffffff;
+  }
+  50% {
+    color: #229ED9;
+  }
+}
+
+.animate-color-blink {
+  animation: colorBlink 2s ease-in-out infinite;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .glass-pulse {
     animation: glassPulse 5s ease-in-out infinite;
