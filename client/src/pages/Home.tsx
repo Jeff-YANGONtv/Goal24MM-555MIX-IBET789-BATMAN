@@ -78,12 +78,6 @@ export default function Home() {
 
       {/* Main Content */}
       <main className="relative z-10 pt-20">
-        {/* Header Title - SEO Optimized */}
-        <div className="text-center pt-4 pb-2">
-          <h1 className="text-xl md:text-2xl font-bold text-yellow-500">GOAL 24 MM - 555MIX , IBET789 , BATMAN SLOT</h1>
-          <p className="text-xs md:text-sm text-gray-400 mt-2">TRUSTED GAMBLING AGENT SITE IN MYANMAR</p>
-        </div>
-
         {/* Header Slider */}
         <header className="w-full max-w-[640px] mx-auto aspect-[640/280] relative overflow-hidden bg-black shadow-lg rounded-b-xl md:rounded-xl border border-gray-900 mb-6">
           <div className="w-full h-full relative">
@@ -146,7 +140,7 @@ export default function Home() {
               <i className="fas fa-viber"></i> Viber
             </a>
             <a
-              href="https://t.me/modernsportsnews"
+              href="https://t.me/goal24MM"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 bg-[#229ED9] text-white px-4 py-1.5 rounded-lg text-[10px] font-bold shadow-lg active:scale-95 transition-transform hover:bg-[#1a7fa8]"
