@@ -22,7 +22,7 @@ export default function Navbar() {
           href="https://t.me/Goal24MM"
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center gap-2 bg-yellow-500 text-black px-5 py-2 rounded-full hover:bg-yellow-400 transition-all transform hover:scale-105 animate-pulse shadow-[0_0_15px_rgba(234,179,8,0.5)] text-sm"
+          className="flex items-center gap-2 px-5 py-2 rounded-full transition-all transform hover:scale-105 animate-blink-blue-white shadow-[0_0_15px_rgba(59,130,246,0.5)] text-sm font-bold"
         >
           <Send size={14} />
           Join Now

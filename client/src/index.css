@@ -100,3 +100,12 @@
 		.animate-float {
 		  animation: float 3s ease-in-out infinite;
 		}
+		
+		@keyframes blink-blue-white {
+		  0%, 100% { background-color: #2563eb; color: white; }
+		  50% { background-color: white; color: #2563eb; }
+		}
+		
+		.animate-blink-blue-white {
+		  animation: blink-blue-white 1s ease-in-out infinite;
+		}
