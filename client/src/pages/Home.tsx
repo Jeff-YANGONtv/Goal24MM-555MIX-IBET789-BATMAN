@@ -31,7 +31,10 @@ export default function Home() {
       {/* Navigation */}
       <nav className="p-6">
         <div className="container mx-auto flex justify-between items-center">
-          <span className="text-2xl font-bold text-yellow-500">Goal24MM</span>
+          <div className="flex items-center gap-2">
+            <img src="/assets/logo.png" alt="Goal24MM Logo" className="h-12 w-auto" />
+            <span className="text-2xl font-bold text-yellow-500">Goal24MM</span>
+          </div>
           <div className="space-x-6">
             {/* Removed Services and Play Now links */}
           </div>
