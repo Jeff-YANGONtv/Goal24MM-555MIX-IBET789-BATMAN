@@ -10,9 +10,10 @@ export default function Home() {
 
   const slides = [
     {
-      image: "/assets/banner1.png",
+      image: "https://lh3.googleusercontent.com/d/1w6btUxJrKNTocrxe4QPKbTDI6Ea2O8SI",
       title: "",
-      description: ""
+      description: "",
+      link: "#features"
     },
     {
       image: "https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&q=80&w=1200",
@@ -45,12 +46,22 @@ export default function Home() {
           <div className="embla__container flex">
             {slides.map((slide, index) => (
               <div key={index} className="embla__slide flex-[0_0_100%] relative min-w-0">
-                <div className="relative h-[400px] md:h-[600px] w-full">
-                  <img 
-                    src={slide.image} 
-                    alt={slide.title}
-                    className={`absolute inset-0 w-full h-full object-cover ${index === 0 ? 'opacity-100' : 'opacity-60'}`}
-                  />
+                <div className="relative w-full max-w-[640px] aspect-[2/1] mx-auto overflow-hidden cursor-pointer">
+                  {slide.link ? (
+                    <a href={slide.link}>
+                      <img 
+                        src={slide.image} 
+                        alt={slide.title}
+                        className={`absolute inset-0 w-full h-full object-cover ${index === 0 ? 'opacity-100' : 'opacity-60'}`}
+                      />
+                    </a>
+                  ) : (
+                    <img 
+                      src={slide.image} 
+                      alt={slide.title}
+                      className={`absolute inset-0 w-full h-full object-cover ${index === 0 ? 'opacity-100' : 'opacity-60'}`}
+                    />
+                  )}
                   {slide.title && (
                     <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40 to-transparent flex items-center justify-center text-center">
                       <div className="container mx-auto px-6">
