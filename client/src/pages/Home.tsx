@@ -72,9 +72,9 @@ export default function Home() {
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* 555MIX Block */}
-            <div id="features/555mix" className="group bg-gray-800/50 backdrop-blur-sm p-8 rounded-2xl border border-gray-700 hover:border-yellow-500/50 transition-all duration-300 hover:-translate-y-2 flex flex-col h-full shadow-xl">
-              <div className="h-12 w-12 bg-yellow-500/20 rounded-lg flex items-center justify-center mb-6 group-hover:bg-yellow-500/30 transition-colors">
-                <span className="text-yellow-500 font-bold text-xl">5</span>
+            <div id="features/555mix" className="group bg-gray-800/50 backdrop-blur-sm p-8 rounded-2xl border border-gray-700 hover:border-yellow-500/50 transition-all duration-300 hover:-translate-y-2 flex flex-col h-full shadow-xl overflow-hidden relative">
+              <div className="mb-6 relative h-32 flex items-center justify-center">
+                <img src="/assets/555mix_logo.png" alt="555MIX" className="h-full w-auto object-contain animate-float" />
               </div>
               <h3 className="text-2xl font-bold mb-4 text-white group-hover:text-yellow-500 transition-colors">555MIX</h3>
               <p className="text-gray-400 mb-8 leading-relaxed flex-grow">
@@ -87,11 +87,11 @@ export default function Home() {
             </div>
 
             {/* IBET789 Block */}
-            <div id="features/ibet789" className="group bg-gray-800/50 backdrop-blur-sm p-8 rounded-2xl border border-gray-700 hover:border-yellow-500/50 transition-all duration-300 hover:-translate-y-2 flex flex-col h-full shadow-xl">
-              <div className="h-12 w-12 bg-blue-500/20 rounded-lg flex items-center justify-center mb-6 group-hover:bg-blue-500/30 transition-colors">
-                <span className="text-blue-500 font-bold text-xl">i</span>
+            <div id="features/ibet789" className="group bg-gray-800/50 backdrop-blur-sm p-8 rounded-2xl border border-gray-700 hover:border-blue-500/50 transition-all duration-300 hover:-translate-y-2 flex flex-col h-full shadow-xl overflow-hidden relative">
+              <div className="mb-6 relative h-32 flex items-center justify-center">
+                <img src="/assets/ibet789_logo.png" alt="IBET789" className="h-full w-auto object-contain animate-float" />
               </div>
-              <h3 className="text-2xl font-bold mb-4 text-white group-hover:text-yellow-500 transition-colors">IBET789</h3>
+              <h3 className="text-2xl font-bold mb-4 text-white group-hover:text-blue-500 transition-colors">IBET789</h3>
               <p className="text-gray-400 mb-8 leading-relaxed flex-grow">
                 Your trusted platform for live sports betting and casino games. Competitive odds and a seamless interface for the best experience.
               </p>
@@ -102,11 +102,11 @@ export default function Home() {
             </div>
 
             {/* SLOT Block */}
-            <div id="features/slot" className="group bg-gray-800/50 backdrop-blur-sm p-8 rounded-2xl border border-gray-700 hover:border-yellow-500/50 transition-all duration-300 hover:-translate-y-2 flex flex-col h-full shadow-xl">
-              <div className="h-12 w-12 bg-purple-500/20 rounded-lg flex items-center justify-center mb-6 group-hover:bg-purple-500/30 transition-colors">
-                <span className="text-purple-500 font-bold text-xl">B</span>
+            <div id="features/slot" className="group bg-gray-800/50 backdrop-blur-sm p-8 rounded-2xl border border-gray-700 hover:border-purple-500/50 transition-all duration-300 hover:-translate-y-2 flex flex-col h-full shadow-xl overflow-hidden relative">
+              <div className="mb-6 relative h-32 flex items-center justify-center">
+                <img src="/assets/batman_logo.png" alt="BATMAN SLOT" className="h-full w-auto object-contain animate-float" />
               </div>
-              <h3 className="text-2xl font-bold mb-4 text-white group-hover:text-yellow-500 transition-colors">BATMAN SLOT</h3>
+              <h3 className="text-2xl font-bold mb-4 text-white group-hover:text-purple-500 transition-colors">BATMAN SLOT</h3>
               <p className="text-gray-400 mb-8 leading-relaxed flex-grow">
                 Experience cutting-edge gaming with exclusive slot titles. High win rates and massive jackpots on our most exciting platform.
               </p>
