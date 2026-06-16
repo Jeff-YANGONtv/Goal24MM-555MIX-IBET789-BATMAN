@@ -154,12 +154,9 @@ export default function Home() {
                             />
                           </div>
                         </div>
-                        <h3 className={`text-base font-bold mb-1.5 text-white ${colors.hover} transition-colors`}>
+                        <h3 className={`text-base font-bold mb-2 text-white ${colors.hover} transition-colors`}>
                           {platform.name}
                         </h3>
-                        <p className="text-gray-400 mb-1.5 leading-relaxed flex-grow text-xs">
-                          {platform.description}
-                        </p>
                         
                         {/* Unit Price Information */}
                         <div className="mb-2 p-2 bg-gray-900/50 rounded-lg border border-gray-700">
