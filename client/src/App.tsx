@@ -23,16 +23,16 @@ function Router() {
                 <title>Goal24MM | Elite Gaming Experience</title>
                 <meta name="description" content="Access the best platforms including 555MIX, IBET789, and BATMAN, all in one place. Fast, secure, and ready for you." />
                 <meta name="keywords" content="Goal24MM, 555MIX, IBET789, BATMAN, gaming, betting, online games" />
-                <link rel="canonical" href="https://goal24mm.vercel.app/" />
+                <link rel="canonical" href="https://goal24mm-555mix-ibet-batman.vercel.app/" />
                 <meta property="og:title" content="Goal24MM | Elite Gaming Experience" />
                 <meta property="og:description" content="Access the best platforms including 555MIX, IBET789, and BATMAN, all in one place. Fast, secure, and ready for you." />
-                <meta property="og:image" content="https://goal24mm.vercel.app/og-image.jpg" />
+                <meta property="og:image" content="https://goal24mm-555mix-ibet-batman.vercel.app/og-image.jpg" />
                 <meta property="og:type" content="website" />
-                <meta property="og:url" content="https://goal24mm.vercel.app/" />
+                <meta property="og:url" content="https://goal24mm-555mix-ibet-batman.vercel.app/" />
                 <meta name="twitter:card" content="summary_large_image" />
                 <meta name="twitter:title" content="Goal24MM | Elite Gaming Experience" />
                 <meta name="twitter:description" content="Access the best platforms including 555MIX, IBET789, and BATMAN, all in one place. Fast, secure, and ready for you." />
-                <meta name="twitter:image" content="https://goal24mm.vercel.app/og-image.jpg" />
+                <meta name="twitter:image" content="https://goal24mm-555mix-ibet-batman.vercel.app/og-image.jpg" />
               </Helmet>
               <Home />
             </>
