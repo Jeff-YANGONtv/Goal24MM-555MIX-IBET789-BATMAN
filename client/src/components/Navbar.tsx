@@ -15,7 +15,7 @@ export default function Navbar() {
 
           {/* Right: Join Now Button */}
           <a
-            href="https://t.me/goal24MM"
+            href="https://t.me/modernsportsnews"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-1 px-2 py-0.5 rounded-full bg-[#229ED9] hover:bg-white hover:text-[#229ED9] transition-all transform hover:scale-105 active:scale-95 text-[8px] font-bold shadow-lg shrink-0 whitespace-nowrap"
