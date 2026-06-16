@@ -1,7 +1,31 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Phone, Send } from "lucide-react";
+import useEmblaCarousel from "embla-carousel-react";
+import Autoplay from "embla-carousel-autoplay";
 
 export default function Home() {
+  const [emblaRef] = useEmblaCarousel({ loop: true }, [
+    Autoplay({ delay: 3000, stopOnInteraction: false })
+  ]);
+
+  const slides = [
+    {
+      image: "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&q=80&w=1200",
+      title: "Experience Elite Gaming",
+      description: "Access the best platforms including 555MIX, IBET789, and BATMAN."
+    },
+    {
+      image: "https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&q=80&w=1200",
+      title: "Fast & Secure Payouts",
+      description: "Enjoy seamless transactions with Wave, KPay, and more."
+    },
+    {
+      image: "https://images.unsplash.com/photo-1552820728-8b83bb6b773f?auto=format&fit=crop&q=80&w=1200",
+      title: "24/7 Professional Support",
+      description: "Our team is always here to help you elevate your gaming experience."
+    }
+  ];
+
   return (
     <div className="min-h-screen bg-gray-900 text-white font-sans">
       {/* Navigation */}
@@ -15,14 +39,31 @@ export default function Home() {
         </div>
       </nav>
 
-      {/* Hero Section */}
-      <header className="hero-gradient py-24 text-center border-b border-gray-700">
-        <div className="container mx-auto px-6">
-          <h1 className="text-5xl md:text-6xl font-extrabold mb-6">Experience Elite Gaming</h1>
-          <p className="text-xl text-gray-300 mb-10 max-w-2xl mx-auto">Access the best platforms including 555MIX, IBET789, and BATMAN, all in one place. Fast, secure, and ready for you.</p>
-          <div className="space-x-4">
-            <button className="bg-yellow-500 text-gray-900 px-8 py-3 rounded-lg text-lg font-bold hover:bg-yellow-400 transition">Get Started</button>
-            <button className="border border-white px-8 py-3 rounded-lg text-lg font-bold hover:bg-white hover:text-gray-900 transition">View Offers</button>
+      {/* Hero Slider Section */}
+      <header className="relative overflow-hidden border-b border-gray-700">
+        <div className="embla" ref={emblaRef}>
+          <div className="embla__container flex">
+            {slides.map((slide, index) => (
+              <div key={index} className="embla__slide flex-[0_0_100%] relative min-w-0">
+                <div className="relative h-[400px] md:h-[600px] w-full">
+                  <img 
+                    src={slide.image} 
+                    alt={slide.title}
+                    className="absolute inset-0 w-full h-full object-cover opacity-60"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40 to-transparent flex items-center justify-center text-center">
+                    <div className="container mx-auto px-6">
+                      <h1 className="text-4xl md:text-6xl font-extrabold mb-4 text-white drop-shadow-lg">
+                        {slide.title}
+                      </h1>
+                      <p className="text-lg md:text-xl text-gray-200 max-w-2xl mx-auto drop-shadow-md">
+                        {slide.description}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </header>
