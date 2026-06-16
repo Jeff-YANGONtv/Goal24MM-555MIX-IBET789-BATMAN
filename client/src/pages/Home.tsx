@@ -89,7 +89,7 @@ export default function Home() {
             Join our promotion & news channel
           </h2>
           <a
-            href="https://t.me/Goal24MM"
+            href="https://t.me/modernsportsnews"
             target="_blank"
             rel="noopener noreferrer"
             className="bg-[#229ED9] hover:bg-white hover:text-[#229ED9] text-white text-[10px] font-bold px-3 py-1 rounded-full shadow-lg active:scale-95 transition-all border border-white"
@@ -144,13 +144,13 @@ export default function Home() {
           </h2>
           <div className="flex justify-center gap-4 flex-wrap">
             <a
-              href="viber://chat?number=%2B95900000000"
+              href="viber://add?number=+959777433266"
               className="flex items-center gap-2 bg-[#7360F2] text-white px-5 py-2 rounded-lg text-xs font-bold shadow-lg active:scale-95 transition-transform hover:bg-[#6250E2]"
             >
               <i className="fas fa-viber"></i> Viber
             </a>
             <a
-              href="https://t.me/Goal24MM"
+              href="https://t.me/modernsportsnews"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 bg-[#229ED9] text-white px-5 py-2 rounded-lg text-xs font-bold shadow-lg active:scale-95 transition-transform hover:bg-[#1a7fa8]"
