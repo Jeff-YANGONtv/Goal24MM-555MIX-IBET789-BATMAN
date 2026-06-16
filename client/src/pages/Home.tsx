@@ -10,9 +10,9 @@ export default function Home() {
 
   const slides = [
     {
-      image: "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&q=80&w=1200",
-      title: "Experience Elite Gaming",
-      description: "Access the best platforms including 555MIX, IBET789, and BATMAN."
+      image: "/assets/banner1.png",
+      title: "",
+      description: ""
     },
     {
       image: "https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&q=80&w=1200",
@@ -49,18 +49,20 @@ export default function Home() {
                   <img 
                     src={slide.image} 
                     alt={slide.title}
-                    className="absolute inset-0 w-full h-full object-cover opacity-60"
+                    className={`absolute inset-0 w-full h-full object-cover ${index === 0 ? 'opacity-100' : 'opacity-60'}`}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40 to-transparent flex items-center justify-center text-center">
-                    <div className="container mx-auto px-6">
-                      <h1 className="text-4xl md:text-6xl font-extrabold mb-4 text-white drop-shadow-lg">
-                        {slide.title}
-                      </h1>
-                      <p className="text-lg md:text-xl text-gray-200 max-w-2xl mx-auto drop-shadow-md">
-                        {slide.description}
-                      </p>
+                  {slide.title && (
+                    <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40 to-transparent flex items-center justify-center text-center">
+                      <div className="container mx-auto px-6">
+                        <h1 className="text-4xl md:text-6xl font-extrabold mb-4 text-white drop-shadow-lg">
+                          {slide.title}
+                        </h1>
+                        <p className="text-lg md:text-xl text-gray-200 max-w-2xl mx-auto drop-shadow-md">
+                          {slide.description}
+                        </p>
+                      </div>
                     </div>
-                  </div>
+                  )}
                 </div>
               </div>
             ))}
