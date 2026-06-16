@@ -13,7 +13,7 @@ export default function Navbar() {
         {/* Center: Marquee Text */}
         <div className="flex-1 mx-8 overflow-hidden hidden md:block">
           <div className="whitespace-nowrap animate-marquee text-sm text-gray-300">
-            ပရိုမိုးရှင်းအစီအစဉ်များနှင့်အားကစားသတင်းများအားဖတ်ရှုရန်
+            အားကစားသတင်းနှင့်ပရိုမိုးရှင်းအစီအစဉ်များအားလေ့လာရန်တယ်လီဂရမ်ချန်နယ်အားJoinပါ
           </div>
         </div>
 
@@ -32,7 +32,7 @@ export default function Navbar() {
       {/* Mobile Marquee (Visible only on small screens) */}
       <div className="md:hidden mt-2 overflow-hidden border-t border-gray-800 pt-2">
         <div className="whitespace-nowrap animate-marquee text-[10px] text-gray-400">
-          ပရိုမိုးရှင်းအစီအစဉ်များနှင့်အားကစားသတင်းများအားဖတ်ရှုရန်
+          အားကစားသတင်းနှင့်ပရိုမိုးရှင်းအစီအစဉ်များအားလေ့လာရန်တယ်လီဂရမ်ချန်နယ်အားJoinပါ
         </div>
       </div>
     </div>

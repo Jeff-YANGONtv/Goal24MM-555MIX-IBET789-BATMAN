@@ -33,7 +33,7 @@ export default function Home() {
       <Navbar />
 
       {/* Hero Slider Section */}
-      <header className="relative overflow-hidden border-b border-gray-700">
+      <header className="relative overflow-hidden border-b border-gray-700 mt-20 md:mt-16">
         <div className="embla" ref={emblaRef}>
           <div className="embla__container flex">
             {slides.map((slide, index) => (
