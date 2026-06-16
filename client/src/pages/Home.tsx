@@ -80,8 +80,8 @@ export default function Home() {
       <main className="relative z-10 pt-20">
         {/* Header Title - SEO Optimized */}
         <div className="text-center pt-4 pb-2">
-          <h1 className="text-2xl font-bold text-yellow-500">Goal24MM - 555mix, ibet789, batman Online Gaming</h1>
-          <p className="text-sm text-gray-400 mt-2">Trusted Slot Games & Betting Platform</p>
+          <h1 className="text-xl md:text-2xl font-bold text-yellow-500">GOAL 24 MM - 555MIX , IBET789 , BATMAN SLOT</h1>
+          <p className="text-xs md:text-sm text-gray-400 mt-2">TRUSTED GAMBLING AGENT SITE IN MYANMAR</p>
         </div>
 
         {/* Header Slider */}
