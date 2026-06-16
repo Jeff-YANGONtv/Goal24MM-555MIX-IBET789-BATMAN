@@ -64,38 +64,55 @@ export default function Home() {
       </header>
 
       {/* Features/Platforms Section */}
-      <section id="features" className="py-20">
+      <section id="features" className="py-20 bg-gray-900/50">
         <div className="container mx-auto px-6">
-          <h2 className="text-xl font-bold text-center mb-12">Our Featured Platforms</h2>
+          <h2 className="text-3xl font-extrabold text-center mb-16 text-white">
+            Our Featured <span className="text-yellow-500">Platforms</span>
+          </h2>
           
-          <div className="space-y-12">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* 555MIX Block */}
-            <div id="features/555mix" className="bg-gray-800 p-8 rounded-xl border border-gray-700 hover:border-yellow-500 transition scroll-mt-24">
-              <h3 className="text-xl font-bold mb-3 text-yellow-500">555MIX</h3>
-              <p className="text-sm text-gray-300 mb-4">Premium gaming experience with high-speed performance and dedicated support. Enjoy a wide range of sports betting and live casino options tailored for elite players.</p>
-              <div className="flex gap-4">
-                <span className="bg-yellow-500/10 text-yellow-500 px-3 py-1 rounded-full text-sm font-medium">Fast Payouts</span>
-                <span className="bg-yellow-500/10 text-yellow-500 px-3 py-1 rounded-full text-sm font-medium">24/7 Support</span>
+            <div id="features/555mix" className="group bg-gray-800/50 backdrop-blur-sm p-8 rounded-2xl border border-gray-700 hover:border-yellow-500/50 transition-all duration-300 hover:-translate-y-2 flex flex-col h-full shadow-xl">
+              <div className="h-12 w-12 bg-yellow-500/20 rounded-lg flex items-center justify-center mb-6 group-hover:bg-yellow-500/30 transition-colors">
+                <span className="text-yellow-500 font-bold text-xl">5</span>
+              </div>
+              <h3 className="text-2xl font-bold mb-4 text-white group-hover:text-yellow-500 transition-colors">555MIX</h3>
+              <p className="text-gray-400 mb-8 leading-relaxed flex-grow">
+                Premium gaming experience with high-speed performance and dedicated support. Enjoy a wide range of sports betting and live casino options.
+              </p>
+              <div className="flex flex-wrap gap-2">
+                <span className="bg-yellow-500/10 text-yellow-500 px-3 py-1 rounded-lg text-xs font-semibold border border-yellow-500/20">Fast Payouts</span>
+                <span className="bg-yellow-500/10 text-yellow-500 px-3 py-1 rounded-lg text-xs font-semibold border border-yellow-500/20">24/7 Support</span>
               </div>
             </div>
 
             {/* IBET789 Block */}
-            <div id="features/ibet789" className="bg-gray-800 p-8 rounded-xl border border-gray-700 hover:border-yellow-500 transition scroll-mt-24">
-              <h3 className="text-xl font-bold mb-3 text-yellow-500">IBET789</h3>
-              <p className="text-sm text-gray-300 mb-4">Your trusted platform for live sports betting and casino games. IBET789 offers competitive odds and a seamless interface for the best betting experience in Myanmar.</p>
-              <div className="flex gap-4">
-                <span className="bg-yellow-500/10 text-yellow-500 px-3 py-1 rounded-full text-sm font-medium">Live Betting</span>
-                <span className="bg-yellow-500/10 text-yellow-500 px-3 py-1 rounded-full text-sm font-medium">Best Odds</span>
+            <div id="features/ibet789" className="group bg-gray-800/50 backdrop-blur-sm p-8 rounded-2xl border border-gray-700 hover:border-yellow-500/50 transition-all duration-300 hover:-translate-y-2 flex flex-col h-full shadow-xl">
+              <div className="h-12 w-12 bg-blue-500/20 rounded-lg flex items-center justify-center mb-6 group-hover:bg-blue-500/30 transition-colors">
+                <span className="text-blue-500 font-bold text-xl">i</span>
+              </div>
+              <h3 className="text-2xl font-bold mb-4 text-white group-hover:text-yellow-500 transition-colors">IBET789</h3>
+              <p className="text-gray-400 mb-8 leading-relaxed flex-grow">
+                Your trusted platform for live sports betting and casino games. Competitive odds and a seamless interface for the best experience.
+              </p>
+              <div className="flex flex-wrap gap-2">
+                <span className="bg-blue-500/10 text-blue-500 px-3 py-1 rounded-lg text-xs font-semibold border border-blue-500/20">Live Betting</span>
+                <span className="bg-blue-500/10 text-blue-500 px-3 py-1 rounded-lg text-xs font-semibold border border-blue-500/20">Best Odds</span>
               </div>
             </div>
 
             {/* SLOT Block */}
-            <div id="features/slot" className="bg-gray-800 p-8 rounded-xl border border-gray-700 hover:border-yellow-500 transition scroll-mt-24">
-              <h3 className="text-xl font-bold mb-3 text-yellow-500">SLOT & BATMAN</h3>
-              <p className="text-sm text-gray-300 mb-4">Experience cutting-edge gaming with exclusive slot titles and community features. Our Batman platform provides the most exciting slot games with high win rates and massive jackpots.</p>
-              <div className="flex gap-4">
-                <span className="bg-yellow-500/10 text-yellow-500 px-3 py-1 rounded-full text-sm font-medium">Big Jackpots</span>
-                <span className="bg-yellow-500/10 text-yellow-500 px-3 py-1 rounded-full text-sm font-medium">Daily Bonuses</span>
+            <div id="features/slot" className="group bg-gray-800/50 backdrop-blur-sm p-8 rounded-2xl border border-gray-700 hover:border-yellow-500/50 transition-all duration-300 hover:-translate-y-2 flex flex-col h-full shadow-xl">
+              <div className="h-12 w-12 bg-purple-500/20 rounded-lg flex items-center justify-center mb-6 group-hover:bg-purple-500/30 transition-colors">
+                <span className="text-purple-500 font-bold text-xl">B</span>
+              </div>
+              <h3 className="text-2xl font-bold mb-4 text-white group-hover:text-yellow-500 transition-colors">BATMAN SLOT</h3>
+              <p className="text-gray-400 mb-8 leading-relaxed flex-grow">
+                Experience cutting-edge gaming with exclusive slot titles. High win rates and massive jackpots on our most exciting platform.
+              </p>
+              <div className="flex flex-wrap gap-2">
+                <span className="bg-purple-500/10 text-purple-500 px-3 py-1 rounded-lg text-xs font-semibold border border-purple-500/20">Big Jackpots</span>
+                <span className="bg-purple-500/10 text-purple-500 px-3 py-1 rounded-lg text-xs font-semibold border border-purple-500/20">Daily Bonuses</span>
               </div>
             </div>
           </div>
