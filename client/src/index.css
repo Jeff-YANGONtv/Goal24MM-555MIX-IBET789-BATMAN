@@ -78,6 +78,16 @@
   box-shadow: 0 2px 0 rgb(0 0 0 / 0.2);
 }
 
-.hero-gradient {
-  background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
-}
+	.hero-gradient {
+	  background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
+	}
+	
+	@keyframes marquee {
+	  0% { transform: translateX(100%); }
+	  100% { transform: translateX(-100%); }
+	}
+	
+	.animate-marquee {
+	  display: inline-block;
+	  animation: marquee 15s linear infinite;
+	}
