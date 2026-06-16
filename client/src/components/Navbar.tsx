@@ -6,28 +6,29 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto flex items-center justify-between font-bold">
         {/* Left: Logo and Brand */}
         <div className="flex items-center gap-2 shrink-0">
-          <span className="text-base font-extrabold tracking-tight text-yellow-500">
-            Goal 24MM
+          <span className="text-[10px] font-extrabold tracking-tight text-yellow-500">
+            Goal 24MM - 555mix, ibet789, batman
           </span>
         </div>
 
-        {/* Center: Marquee Text */}
-        <div className="flex-1 mx-6 overflow-hidden hidden md:block">
-          <div className="whitespace-nowrap animate-marquee text-xs text-gray-300">
-            အားကစားသတင်းနှင့်ပရိုမိုးရှင်းအစီအစဉ်များအားလေ့လာရန်တယ်လီဂရမ်ချန်နယ်အားJoinပါ
+        {/* Center: Marquee Text with Join Button */}
+        <div className="flex-1 mx-4 overflow-hidden hidden md:flex items-center justify-between">
+          <div className="flex-1 overflow-hidden">
+            <div className="whitespace-nowrap animate-marquee text-[10px] text-gray-300">
+              အားကစားသတင်းနှင့်ပရိုမိုးရှင်းအစီအစဉ်များအားလေ့လာရန်တယ်လီဂရမ်ချန်နယ်အားJoinပါ
+            </div>
           </div>
+          {/* Right: Join Now Button */}
+          <a
+            href="https://t.me/modernsportsnews"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1 px-3 py-1 rounded-full bg-[#229ED9] hover:bg-white hover:text-[#229ED9] transition-all transform hover:scale-105 active:scale-95 text-[9px] font-bold shadow-lg ml-4 shrink-0"
+          >
+            <Send size={10} />
+            Join
+          </a>
         </div>
-
-        {/* Right: Join Now Button */}
-        <a
-          href="https://t.me/modernsportsnews"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center gap-1 px-4 py-1.5 rounded-full bg-[#229ED9] hover:bg-white hover:text-[#229ED9] transition-all transform hover:scale-105 active:scale-95 text-xs font-bold shadow-lg"
-        >
-          <Send size={12} />
-          Join
-        </a>
       </div>
 
       {/* Mobile Marquee */}

@@ -106,23 +106,31 @@ export default function Home() {
           </div>
         </header>
 
-        {/* Join Section - SEO Rich */}
-        <div className="flex justify-center items-center gap-3 mt-3 px-4 mb-6 flex-wrap">
-          <h2 className="text-xs font-bold animate-pulse text-white">
-            Join Goal24MM - Get 555mix, ibet789, batman Updates & Promotions
+        {/* Contact Section - Viber & Telegram - SEO Optimized */}
+        <div className="max-w-sm mx-auto px-4 text-center py-6 mb-6">
+          <h2 className="text-xs font-bold text-yellow-400 mb-3">
+            Goal24MM မှာဆော့ကစားဖို့အခုပဲအကောင့်ဖွင့်လိုက်ပါ
           </h2>
-          <a
-            href="https://t.me/modernsportsnews"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="bg-[#229ED9] hover:bg-white hover:text-[#229ED9] text-white text-[10px] font-bold px-3 py-1 rounded-full shadow-lg active:scale-95 transition-all border border-white"
-          >
-            JOIN
-          </a>
+          <div className="flex justify-center gap-3 flex-wrap">
+            <a
+              href="viber://add?number=+959777433266"
+              className="flex items-center gap-2 bg-[#7360F2] text-white px-4 py-1.5 rounded-lg text-[10px] font-bold shadow-lg active:scale-95 transition-transform hover:bg-[#6250E2]"
+            >
+              <i className="fas fa-viber"></i> Viber
+            </a>
+            <a
+              href="https://t.me/modernsportsnews"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 bg-[#229ED9] text-white px-4 py-1.5 rounded-lg text-[10px] font-bold shadow-lg active:scale-95 transition-transform hover:bg-[#1a7fa8]"
+            >
+              <i className="fas fa-telegram-plane"></i> Telegram
+            </a>
+          </div>
         </div>
 
         {/* Payment Icons - SEO Rich */}
-        <div className="max-w-4xl mx-auto mt-6 px-4 text-center mb-8">
+        <div className="max-w-4xl mx-auto mt-4 px-4 text-center mb-8">
           <h3 className="font-bold mb-3 text-gray-500 text-[10px]">
             SUPPORTED PAYMENT METHODS - Secure & Fast Transactions
           </h3>
@@ -142,9 +150,9 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Game Rates - SEO Optimized */}
-        <div className="max-w-3xl mx-auto px-4 mt-6 mb-8 flex flex-row justify-center gap-3 flex-wrap">
-          <h2 className="w-full text-center text-sm font-bold text-yellow-400 mb-4">Popular Gaming Platforms: 555mix, ibet789, batman Slots</h2>
+        {/* Game Rates - SEO Optimized - Moved Up */}
+        <div className="max-w-3xl mx-auto px-4 mt-4 mb-8 flex flex-row justify-center gap-3 flex-wrap">
+          <h2 className="w-full text-center text-[9px] font-bold text-yellow-400 mb-4">Popular Gaming Platforms: 555mix, ibet789, batman Slots</h2>
           {platforms.map((platform) => (
             <div
               key={platform.id}
@@ -169,29 +177,7 @@ export default function Home() {
           ))}
         </div>
 
-        {/* Contact Section - SEO Optimized */}
-        <div className="max-w-sm mx-auto px-4 text-center pb-12">
-          <h2 className="text-sm font-bold text-yellow-400 mb-4">
-            Start Playing Goal24MM - 555mix, ibet789, batman Now!
-          </h2>
-          <p className="text-xs text-gray-400 mb-4">Open Account & Play Online Slots & Betting Games</p>
-          <div className="flex justify-center gap-4 flex-wrap">
-            <a
-              href="viber://add?number=+959777433266"
-              className="flex items-center gap-2 bg-[#7360F2] text-white px-5 py-2 rounded-lg text-xs font-bold shadow-lg active:scale-95 transition-transform hover:bg-[#6250E2]"
-            >
-              <i className="fas fa-viber"></i> Viber
-            </a>
-            <a
-              href="https://t.me/modernsportsnews"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 bg-[#229ED9] text-white px-5 py-2 rounded-lg text-xs font-bold shadow-lg active:scale-95 transition-transform hover:bg-[#1a7fa8]"
-            >
-              <i className="fas fa-telegram-plane"></i> Telegram
-            </a>
-          </div>
-        </div>
+
       </main>
     </div>
   );
