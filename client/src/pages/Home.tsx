@@ -31,18 +31,36 @@ export default function Home() {
       <section id="features" className="py-20">
         <div className="container mx-auto px-6">
           <h2 className="text-3xl font-bold text-center mb-16">Our Featured Platforms</h2>
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="bg-gray-800 p-8 rounded-xl border border-gray-700 hover:border-yellow-500 transition">
-              <h3 className="text-2xl font-bold mb-4 text-yellow-500">555MIX</h3>
-              <p className="text-gray-400">Premium gaming experience with high-speed performance and dedicated support.</p>
+          
+          <div className="space-y-12">
+            {/* 555MIX Block */}
+            <div id="features/555mix" className="bg-gray-800 p-8 rounded-xl border border-gray-700 hover:border-yellow-500 transition scroll-mt-24">
+              <h3 className="text-3xl font-bold mb-4 text-yellow-500">555MIX</h3>
+              <p className="text-lg text-gray-300 mb-4">Premium gaming experience with high-speed performance and dedicated support. Enjoy a wide range of sports betting and live casino options tailored for elite players.</p>
+              <div className="flex gap-4">
+                <span className="bg-yellow-500/10 text-yellow-500 px-3 py-1 rounded-full text-sm font-medium">Fast Payouts</span>
+                <span className="bg-yellow-500/10 text-yellow-500 px-3 py-1 rounded-full text-sm font-medium">24/7 Support</span>
+              </div>
             </div>
-            <div className="bg-gray-800 p-8 rounded-xl border border-gray-700 hover:border-yellow-500 transition">
-              <h3 className="text-2xl font-bold mb-4 text-yellow-500">IBET789</h3>
-              <p className="text-gray-400">Your trusted platform for live sports betting and casino games.</p>
+
+            {/* IBET789 Block */}
+            <div id="features/ibet789" className="bg-gray-800 p-8 rounded-xl border border-gray-700 hover:border-yellow-500 transition scroll-mt-24">
+              <h3 className="text-3xl font-bold mb-4 text-yellow-500">IBET789</h3>
+              <p className="text-lg text-gray-300 mb-4">Your trusted platform for live sports betting and casino games. IBET789 offers competitive odds and a seamless interface for the best betting experience in Myanmar.</p>
+              <div className="flex gap-4">
+                <span className="bg-yellow-500/10 text-yellow-500 px-3 py-1 rounded-full text-sm font-medium">Live Betting</span>
+                <span className="bg-yellow-500/10 text-yellow-500 px-3 py-1 rounded-full text-sm font-medium">Best Odds</span>
+              </div>
             </div>
-            <div className="bg-gray-800 p-8 rounded-xl border border-gray-700 hover:border-yellow-500 transition">
-              <h3 className="text-2xl font-bold mb-4 text-yellow-500">BATMAN</h3>
-              <p className="text-gray-400">Experience cutting-edge gaming with exclusive titles and community features.</p>
+
+            {/* SLOT Block */}
+            <div id="features/slot" className="bg-gray-800 p-8 rounded-xl border border-gray-700 hover:border-yellow-500 transition scroll-mt-24">
+              <h3 className="text-3xl font-bold mb-4 text-yellow-500">SLOT & BATMAN</h3>
+              <p className="text-lg text-gray-300 mb-4">Experience cutting-edge gaming with exclusive slot titles and community features. Our Batman platform provides the most exciting slot games with high win rates and massive jackpots.</p>
+              <div className="flex gap-4">
+                <span className="bg-yellow-500/10 text-yellow-500 px-3 py-1 rounded-full text-sm font-medium">Big Jackpots</span>
+                <span className="bg-yellow-500/10 text-yellow-500 px-3 py-1 rounded-full text-sm font-medium">Daily Bonuses</span>
+              </div>
             </div>
           </div>
         </div>
