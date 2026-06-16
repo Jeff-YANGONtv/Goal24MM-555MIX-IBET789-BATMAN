@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Phone, Send } from "lucide-react";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
+import Navbar from "../components/Navbar";
 
 export default function Home() {
   const [emblaRef] = useEmblaCarousel({ loop: true }, [
@@ -28,18 +29,8 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-gray-900 text-white font-sans">
-      {/* Navigation */}
-      <nav className="p-6">
-        <div className="container mx-auto flex justify-between items-center">
-          <div className="flex items-center gap-2">
-            <img src="/assets/logo.png" alt="Goal24MM Logo" className="h-12 w-auto" />
-            <span className="text-2xl font-bold text-yellow-500">Goal24MM</span>
-          </div>
-          <div className="space-x-6">
-            {/* Removed Services and Play Now links */}
-          </div>
-        </div>
-      </nav>
+      {/* Navigation Bar */}
+      <Navbar />
 
       {/* Hero Slider Section */}
       <header className="relative overflow-hidden border-b border-gray-700">
