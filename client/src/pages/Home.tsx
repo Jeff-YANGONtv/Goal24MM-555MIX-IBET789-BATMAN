@@ -9,6 +9,11 @@ export default function Home() {
     Autoplay({ delay: 3000, stopOnInteraction: false })
   ]);
 
+  const [emblaFeaturesRef] = useEmblaCarousel(
+    { loop: true, align: "start", skipSnaps: false },
+    [Autoplay({ delay: 4000, stopOnInteraction: false })]
+  );
+
   const slides = [
     {
       image: "https://lh3.googleusercontent.com/d/1w6btUxJrKNTocrxe4QPKbTDI6Ea2O8SI",
@@ -26,6 +31,63 @@ export default function Home() {
       description: ""
     }
   ];
+
+  const platforms = [
+    {
+      id: "555mix",
+      name: "555MIX",
+      logo: "/assets/555mix_logo.png",
+      description: "Premium gaming experience with high-speed performance and dedicated support. Enjoy a wide range of sports betting and live casino options.",
+      unit: "တစ်ယူနစ် တစ်ကျပ်",
+      unitLabel: "(မြန်မာကြေး)",
+      color: "yellow",
+      tags: ["Fast Payouts", "24/7 Support"]
+    },
+    {
+      id: "ibet789",
+      name: "IBET789",
+      logo: "/assets/ibet789_logo.png",
+      description: "Your trusted platform for live sports betting and casino games. Competitive odds and a seamless interface for the best experience.",
+      unit: "တစ်ယူနစ် - တစ်ထောင်ကျပ်",
+      unitLabel: "(live bet)",
+      color: "blue",
+      tags: ["Live Betting", "Best Odds"]
+    },
+    {
+      id: "batman688",
+      name: "BATMAN 688",
+      logo: "/assets/batman_logo.png",
+      description: "Experience cutting-edge gaming with exclusive slot titles. High win rates and massive jackpots on our most exciting platform.",
+      unit: "တစ်ယူနစ် တစ်ကျပ်",
+      unitLabel: "(Highest RTP)",
+      color: "purple",
+      tags: ["Big Jackpots", "Daily Bonuses"]
+    }
+  ];
+
+  const getColorClasses = (color: string) => {
+    const colors: Record<string, { border: string; hover: string; tag: string; tagText: string }> = {
+      yellow: {
+        border: "border-yellow-500/50",
+        hover: "group-hover:text-yellow-500",
+        tag: "bg-yellow-500/10",
+        tagText: "text-yellow-500"
+      },
+      blue: {
+        border: "border-blue-500/50",
+        hover: "group-hover:text-blue-500",
+        tag: "bg-blue-500/10",
+        tagText: "text-blue-500"
+      },
+      purple: {
+        border: "border-purple-500/50",
+        hover: "group-hover:text-purple-500",
+        tag: "bg-purple-500/10",
+        tagText: "text-purple-500"
+      }
+    };
+    return colors[color] || colors.yellow;
+  };
 
   return (
     <div className="min-h-screen bg-gray-900 text-white font-sans">
@@ -63,56 +125,67 @@ export default function Home() {
         </div>
       </header>
 
-      {/* Features/Platforms Section */}
+      {/* Features/Platforms Section - Horizontal Auto-Play Slider */}
       <section id="features" className="py-20 bg-gray-900/50">
         <div className="container mx-auto px-6">
           <h2 className="text-3xl font-extrabold text-center mb-16 text-white">
             Our Featured <span className="text-yellow-500">Platforms</span>
           </h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* 555MIX Block */}
-            <div id="features/555mix" className="group bg-gray-800/50 backdrop-blur-sm p-8 rounded-2xl border border-gray-700 hover:border-yellow-500/50 transition-all duration-300 hover:-translate-y-2 flex flex-col h-full shadow-xl overflow-hidden relative">
-              <div className="mb-6 relative h-32 flex items-center justify-center">
-                <img src="/assets/555mix_logo.png" alt="555MIX" className="h-full w-auto object-contain animate-float" />
-              </div>
-              <h3 className="text-2xl font-bold mb-4 text-white group-hover:text-yellow-500 transition-colors">555MIX</h3>
-              <p className="text-gray-400 mb-8 leading-relaxed flex-grow">
-                Premium gaming experience with high-speed performance and dedicated support. Enjoy a wide range of sports betting and live casino options.
-              </p>
-              <div className="flex flex-wrap gap-2">
-                <span className="bg-yellow-500/10 text-yellow-500 px-3 py-1 rounded-lg text-xs font-semibold border border-yellow-500/20">Fast Payouts</span>
-                <span className="bg-yellow-500/10 text-yellow-500 px-3 py-1 rounded-lg text-xs font-semibold border border-yellow-500/20">24/7 Support</span>
-              </div>
-            </div>
+          {/* Horizontal Auto-Play Slider */}
+          <div className="overflow-hidden">
+            <div className="embla" ref={emblaFeaturesRef}>
+              <div className="embla__container flex gap-8">
+                {platforms.map((platform) => {
+                  const colors = getColorClasses(platform.color);
+                  return (
+                    <div
+                      key={platform.id}
+                      className="embla__slide flex-[0_0_100%] md:flex-[0_0_calc(50%-1rem)] lg:flex-[0_0_calc(33.333%-1.33rem)] min-w-0"
+                    >
+                      <div className={`group bg-gray-800/50 backdrop-blur-sm p-8 rounded-2xl border border-gray-700 hover:${colors.border} transition-all duration-300 hover:-translate-y-2 flex flex-col h-full shadow-xl overflow-hidden relative`}>
+                        {/* Circle Logo Frame */}
+                        <div className="mb-6 relative h-40 flex items-center justify-center">
+                          <div className={`w-40 h-40 rounded-full border-4 border-${platform.color}-500/30 flex items-center justify-center bg-gray-900/50`}>
+                            <img 
+                              src={platform.logo} 
+                              alt={platform.name} 
+                              className="h-24 w-24 object-contain animate-float" 
+                            />
+                          </div>
+                        </div>
+                        <h3 className={`text-2xl font-bold mb-4 text-white ${colors.hover} transition-colors`}>
+                          {platform.name}
+                        </h3>
+                        <p className="text-gray-400 mb-4 leading-relaxed flex-grow">
+                          {platform.description}
+                        </p>
+                        
+                        {/* Unit Price Information */}
+                        <div className="mb-6 p-4 bg-gray-900/50 rounded-lg border border-gray-700">
+                          <p className="text-sm text-gray-300 font-semibold">
+                            {platform.unit}
+                          </p>
+                          <p className="text-xs text-gray-500 mt-1">
+                            {platform.unitLabel}
+                          </p>
+                        </div>
 
-            {/* IBET789 Block */}
-            <div id="features/ibet789" className="group bg-gray-800/50 backdrop-blur-sm p-8 rounded-2xl border border-gray-700 hover:border-blue-500/50 transition-all duration-300 hover:-translate-y-2 flex flex-col h-full shadow-xl overflow-hidden relative">
-              <div className="mb-6 relative h-32 flex items-center justify-center">
-                <img src="/assets/ibet789_logo.png" alt="IBET789" className="h-full w-auto object-contain animate-float" />
-              </div>
-              <h3 className="text-2xl font-bold mb-4 text-white group-hover:text-blue-500 transition-colors">IBET789</h3>
-              <p className="text-gray-400 mb-8 leading-relaxed flex-grow">
-                Your trusted platform for live sports betting and casino games. Competitive odds and a seamless interface for the best experience.
-              </p>
-              <div className="flex flex-wrap gap-2">
-                <span className="bg-blue-500/10 text-blue-500 px-3 py-1 rounded-lg text-xs font-semibold border border-blue-500/20">Live Betting</span>
-                <span className="bg-blue-500/10 text-blue-500 px-3 py-1 rounded-lg text-xs font-semibold border border-blue-500/20">Best Odds</span>
-              </div>
-            </div>
-
-            {/* SLOT Block */}
-            <div id="features/slot" className="group bg-gray-800/50 backdrop-blur-sm p-8 rounded-2xl border border-gray-700 hover:border-purple-500/50 transition-all duration-300 hover:-translate-y-2 flex flex-col h-full shadow-xl overflow-hidden relative">
-              <div className="mb-6 relative h-32 flex items-center justify-center">
-                <img src="/assets/batman_logo.png" alt="BATMAN SLOT" className="h-full w-auto object-contain animate-float" />
-              </div>
-              <h3 className="text-2xl font-bold mb-4 text-white group-hover:text-purple-500 transition-colors">BATMAN SLOT</h3>
-              <p className="text-gray-400 mb-8 leading-relaxed flex-grow">
-                Experience cutting-edge gaming with exclusive slot titles. High win rates and massive jackpots on our most exciting platform.
-              </p>
-              <div className="flex flex-wrap gap-2">
-                <span className="bg-purple-500/10 text-purple-500 px-3 py-1 rounded-lg text-xs font-semibold border border-purple-500/20">Big Jackpots</span>
-                <span className="bg-purple-500/10 text-purple-500 px-3 py-1 rounded-lg text-xs font-semibold border border-purple-500/20">Daily Bonuses</span>
+                        {/* Tags */}
+                        <div className="flex flex-wrap gap-2">
+                          {platform.tags.map((tag) => (
+                            <span 
+                              key={tag}
+                              className={`${colors.tag} ${colors.tagText} px-3 py-1 rounded-lg text-xs font-semibold border border-${platform.color}-500/20`}
+                            >
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </div>
@@ -160,15 +233,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Call to Action Section (New) */}
-      <section className="bg-yellow-500 text-gray-900 py-20 text-center">
-        <div className="container mx-auto px-6">
-          <h2 className="text-2xl font-extrabold mb-3">Ready to Play?</h2>
-          <p className="text-base mb-6 max-w-2xl mx-auto">Join Goal24MM today and elevate your gaming experience. Fast, secure, and rewarding.</p>
-          <a href="#" className="bg-gray-900 text-yellow-500 px-10 py-4 rounded-full text-xl font-bold hover:bg-gray-700 transition">Sign Up Now</a>
-        </div>
-      </section>
-
       {/* Footer (New) */}
       <footer className="bg-gray-800 py-8 text-center text-gray-400 text-sm">
         <div className="container mx-auto px-6">
@@ -182,5 +246,4 @@ export default function Home() {
     </div>
   );
 }
-
 
