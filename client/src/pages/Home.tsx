@@ -146,27 +146,27 @@ export default function Home() {
                       <div className={`group bg-gray-800/50 backdrop-blur-sm p-3 rounded-xl border border-gray-700 hover:${colors.border} transition-all duration-300 hover:-translate-y-2 flex flex-col h-full shadow-xl overflow-hidden relative`}>
                         {/* App Icon Frame (512x512 ratio) */}
                         <div className="mb-3 relative flex items-center justify-center">
-                          <div className={`w-32 h-32 rounded-2xl border-2 border-${platform.color}-500/30 flex items-center justify-center bg-gray-900/50`}>
+                          <div className={`w-24 h-24 rounded-lg border-2 border-${platform.color}-500/30 flex items-center justify-center bg-gray-900/50`}>
                             <img 
                               src={platform.logo} 
                               alt={platform.name} 
-                              className="h-20 w-20 object-contain animate-float" 
+                              className="h-16 w-16 object-contain animate-float" 
                             />
                           </div>
                         </div>
-                        <h3 className={`text-lg font-bold mb-2 text-white ${colors.hover} transition-colors`}>
+                        <h3 className={`text-base font-bold mb-1.5 text-white ${colors.hover} transition-colors`}>
                           {platform.name}
                         </h3>
-                        <p className="text-gray-400 mb-2 leading-relaxed flex-grow text-sm">
+                        <p className="text-gray-400 mb-1.5 leading-relaxed flex-grow text-xs">
                           {platform.description}
                         </p>
                         
                         {/* Unit Price Information */}
                         <div className="mb-2 p-2 bg-gray-900/50 rounded-lg border border-gray-700">
-                          <p className="text-xs text-gray-300 font-semibold">
+                          <p className="text-[11px] text-gray-300 font-semibold">
                             {platform.unit}
                           </p>
-                          <p className="text-[10px] text-gray-500 mt-0.5">
+                          <p className="text-[9px] text-gray-500 mt-0.5">
                             {platform.unitLabel}
                           </p>
                         </div>
@@ -176,7 +176,7 @@ export default function Home() {
                           {platform.tags.map((tag) => (
                             <span 
                               key={tag}
-                              className={`${colors.tag} ${colors.tagText} px-3 py-1 rounded-lg text-xs font-semibold border border-${platform.color}-500/20`}
+                              className={`${colors.tag} ${colors.tagText} px-2 py-0.5 rounded text-[10px] font-semibold border border-${platform.color}-500/20`}
                             >
                               {tag}
                             </span>
