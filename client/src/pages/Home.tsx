@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Send, Phone } from "lucide-react";
 import { Helmet } from "react-helmet-async";
 import Navbar from "../components/Navbar";
+import { altTextGenerator, imageOptimizationConfig } from "../lib/imageOptimization";
 
 export default function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -95,8 +96,10 @@ export default function Home() {
               >
                 <img
                   src={slide}
-                  alt={`Slide ${index + 1}`}
+                  alt={altTextGenerator.carouselSlide(index, slides.length)}
                   className="w-full h-full object-contain"
+                  loading={imageOptimizationConfig.carouselImage().loading}
+                  decoding={imageOptimizationConfig.carouselImage().decoding}
                 />
               </div>
             ))}
@@ -128,8 +131,12 @@ export default function Home() {
               <img
                 key={index}
                 src={method}
-                alt={`Payment method ${index + 1}`}
+                alt={altTextGenerator.paymentMethod(`Payment Method ${index + 1}`, index)}
                 className="w-10 h-10 rounded-full border border-gray-700 object-cover"
+                loading={imageOptimizationConfig.paymentIcon().loading}
+                decoding={imageOptimizationConfig.paymentIcon().decoding}
+                width={40}
+                height={40}
               />
             ))}
           </div>
@@ -145,8 +152,12 @@ export default function Home() {
             >
               <img
                 src={platform.logo}
-                alt={`${platform.name} - Online Slot Games`}
+                alt={altTextGenerator.platformLogo(platform.name)}
                 className="h-8 w-auto mb-1 object-contain"
+                loading={imageOptimizationConfig.platformLogo().loading}
+                decoding={imageOptimizationConfig.platformLogo().decoding}
+                width={32}
+                height={32}
               />
               <h3 className="text-[9px] font-bold text-gray-400">
                 {platform.name}

@@ -6,13 +6,69 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
     <link rel="icon" type="image/png" href="/assets/logo.png" />
     <title>Goal24MM - Best & Trusted Agent Site</title>
+    
+    <!-- Performance Optimization -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://user13973.na.imgto.link">
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Goal24MM - Best online gaming platform featuring 555mix, ibet789, batman slots and more. Fast, secure, and trusted betting experience." />
+    <meta name="keywords" content="Goal24MM, 555mix, ibet789, batman, slots, online gaming, betting" />
+    <meta name="robots" content="index, follow" />
+    <meta name="language" content="English" />
+    <meta name="revisit-after" content="7 days" />
+    <meta name="author" content="Goal24MM" />
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Goal24MM - Elite Gaming Experience" />
+    <meta property="og:description" content="Access the best platforms including 555MIX, IBET789, and BATMAN, all in one place." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://goal24mm-555mix-ibet-batman.vercel.app/" />
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Goal24MM - Elite Gaming Experience" />
+    <meta name="twitter:description" content="Access the best platforms including 555MIX, IBET789, and BATMAN, all in one place." />
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://goal24mm-555mix-ibet-batman.vercel.app/" />
+    
+    <!-- Preload Critical Resources -->
+    <link rel="preload" href="/src/main.tsx" as="script" />
         
 
   </head>
 
   <body>
     <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+    <script type="module" src="/src/main.tsx" defer></script>
+    
+    <!-- Web Vitals Monitoring -->
+    <script>
+      // Monitor Web Vitals for performance optimization
+      if ('PerformanceObserver' in window) {
+        // LCP Monitoring
+        const lcpObserver = new PerformanceObserver((list) => {
+          const entries = list.getEntries();
+          const lastEntry = entries[entries.length - 1];
+          console.log('LCP:', lastEntry.renderTime || lastEntry.loadTime);
+        });
+        lcpObserver.observe({ entryTypes: ['largest-contentful-paint'] });
+        
+        // CLS Monitoring
+        let clsValue = 0;
+        const clsObserver = new PerformanceObserver((list) => {
+          for (const entry of list.getEntries()) {
+            if (!entry.hadRecentInput) {
+              clsValue += entry.value;
+              console.log('CLS:', clsValue);
+            }
+          }
+        });
+        clsObserver.observe({ entryTypes: ['layout-shift'] });
+      }
+    </script>
     <!-- Analytics script - only loaded if env variables are defined -->
     <script>
       if (typeof %VITE_ANALYTICS_ENDPOINT% !== 'undefined' && typeof %VITE_ANALYTICS_WEBSITE_ID% !== 'undefined') {
