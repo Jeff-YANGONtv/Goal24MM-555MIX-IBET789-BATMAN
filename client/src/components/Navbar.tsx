@@ -6,12 +6,12 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto flex items-center justify-between font-bold">
         {/* Left: Logo and Brand */}
         <div className="flex items-center gap-2 shrink-0">
-          <span className="text-[10px] font-extrabold tracking-tight text-yellow-500">
-            Goal 24MM - 555mix, ibet789, batman
+          <span className="text-[9px] md:text-[10px] font-extrabold tracking-tight text-yellow-500">
+            Goal24MM - 555mix, ibet789, batman Online Gaming
           </span>
         </div>
 
-        {/* Center: Marquee Text with Join Button */}
+        {/* Center/Right: Marquee Text with Join Button (Desktop) */}
         <div className="flex-1 mx-4 overflow-hidden hidden md:flex items-center justify-between">
           <div className="flex-1 overflow-hidden">
             <div className="whitespace-nowrap animate-marquee text-[10px] text-gray-300">
@@ -29,11 +29,24 @@ export default function Navbar() {
             Join
           </a>
         </div>
+
+        {/* Mobile Join Button (Visible on mobile, hidden on desktop) */}
+        <div className="md:hidden flex items-center">
+          <a
+            href="https://t.me/modernsportsnews"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1 px-2 py-1 rounded-full bg-[#229ED9] text-[8px] font-bold shadow-lg"
+          >
+            <Send size={8} />
+            Join
+          </a>
+        </div>
       </div>
 
       {/* Mobile Marquee */}
       <div className="md:hidden mt-2 overflow-hidden border-t border-gray-900 pt-2">
-        <div className="whitespace-nowrap animate-marquee text-[10px] text-gray-400">
+        <div className="whitespace-nowrap animate-marquee text-[9px] text-gray-400">
           အားကစားသတင်းနှင့်ပရိုမိုးရှင်းအစီအစဉ်များအားလေ့လာရန်တယ်လီဂရမ်ချန်နယ်အားJoinပါ
         </div>
       </div>
