@@ -106,52 +106,8 @@ export default function Home() {
           </div>
         </header>
 
-        {/* Contact Section - Viber & Telegram - SEO Optimized */}
-        <div className="max-w-sm mx-auto px-4 text-center py-6 mb-6">
-          <h2 className="text-xs font-bold text-yellow-400 mb-3">
-            Goal24MM မှာဆော့ကစားဖို့အခုပဲအကောင့်ဖွင့်လိုက်ပါ
-          </h2>
-          <div className="flex justify-center gap-3 flex-wrap">
-            <a
-              href="viber://add?number=+959777433266"
-              className="flex items-center gap-2 bg-[#7360F2] text-white px-4 py-1.5 rounded-lg text-[10px] font-bold shadow-lg active:scale-95 transition-transform hover:bg-[#6250E2]"
-            >
-              <i className="fas fa-viber"></i> Viber
-            </a>
-            <a
-              href="https://t.me/modernsportsnews"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 bg-[#229ED9] text-white px-4 py-1.5 rounded-lg text-[10px] font-bold shadow-lg active:scale-95 transition-transform hover:bg-[#1a7fa8]"
-            >
-              <i className="fas fa-telegram-plane"></i> Telegram
-            </a>
-          </div>
-        </div>
-
-        {/* Payment Icons - SEO Rich */}
-        <div className="max-w-4xl mx-auto mt-4 px-4 text-center mb-8">
-          <h3 className="font-bold mb-3 text-gray-500 text-[10px]">
-            SUPPORTED PAYMENT METHODS - Secure & Fast Transactions
-          </h3>
-          <div className="flex justify-center flex-wrap gap-3">
-            {paymentMethods.map((method, index) => (
-              <img
-                key={index}
-                src={method}
-                alt={altTextGenerator.paymentMethod(`Payment Method ${index + 1}`, index)}
-                className="w-10 h-10 rounded-full border border-gray-700 object-cover"
-                loading={imageOptimizationConfig.paymentIcon().loading}
-                decoding={imageOptimizationConfig.paymentIcon().decoding}
-                width={40}
-                height={40}
-              />
-            ))}
-          </div>
-        </div>
-
-        {/* Game Rates - SEO Optimized - Moved Up */}
-        <div className="max-w-3xl mx-auto px-4 mt-4 mb-8 flex flex-row justify-center gap-3 flex-wrap">
+        {/* Game Rates - SEO Optimized - Moved Up to replace old join section */}
+        <div className="max-w-3xl mx-auto px-4 mt-4 mb-6 flex flex-row justify-center gap-3 flex-wrap">
           <h2 className="w-full text-center text-[9px] font-bold text-yellow-400 mb-4">Popular Gaming Platforms: 555mix, ibet789, batman Slots</h2>
           {platforms.map((platform) => (
             <div
@@ -177,7 +133,49 @@ export default function Home() {
           ))}
         </div>
 
+        {/* Contact Section - Viber & Telegram - SEO Optimized */}
+        <div className="max-w-sm mx-auto px-4 text-center py-4 mb-6">
+          <h2 className="text-xs font-bold text-yellow-400 mb-3">
+            Goal24MM မှာဆော့ကစားဖို့အခုပဲအကောင့်ဖွင့်လိုက်ပါ
+          </h2>
+          <div className="flex justify-center gap-3 flex-wrap">
+            <a
+              href="viber://add?number=+959777433266"
+              className="flex items-center gap-2 bg-[#7360F2] text-white px-4 py-1.5 rounded-lg text-[10px] font-bold shadow-lg active:scale-95 transition-transform hover:bg-[#6250E2]"
+            >
+              <i className="fas fa-viber"></i> Viber
+            </a>
+            <a
+              href="https://t.me/modernsportsnews"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 bg-[#229ED9] text-white px-4 py-1.5 rounded-lg text-[10px] font-bold shadow-lg active:scale-95 transition-transform hover:bg-[#1a7fa8]"
+            >
+              <i className="fas fa-telegram-plane"></i> Telegram
+            </a>
+          </div>
+        </div>
 
+        {/* Payment Icons - SEO Rich - At the bottom */}
+        <div className="max-w-4xl mx-auto mt-4 px-4 text-center mb-12">
+          <h3 className="font-bold mb-3 text-gray-500 text-[10px]">
+            SUPPORTED PAYMENT METHODS - Secure & Fast Transactions
+          </h3>
+          <div className="flex justify-center flex-wrap gap-3">
+            {paymentMethods.map((method, index) => (
+              <img
+                key={index}
+                src={method}
+                alt={altTextGenerator.paymentMethod(`Payment Method ${index + 1}`, index)}
+                className="w-10 h-10 rounded-full border border-gray-700 object-cover"
+                loading={imageOptimizationConfig.paymentIcon().loading}
+                decoding={imageOptimizationConfig.paymentIcon().decoding}
+                width={40}
+                height={40}
+              />
+            ))}
+          </div>
+        </div>
       </main>
     </div>
   );
