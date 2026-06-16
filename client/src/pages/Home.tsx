@@ -20,9 +20,9 @@ export default function Home() {
       description: ""
     },
     {
-      image: "https://images.unsplash.com/photo-1552820728-8b83bb6b773f?auto=format&fit=crop&q=80&w=1200",
-      title: "24/7 Professional Support",
-      description: "Our team is always here to help you elevate your gaming experience."
+      image: "https://lh3.googleusercontent.com/d/1pFtI_EziRyYTSDeM3hrfxalkiz1jaSSh",
+      title: "",
+      description: ""
     }
   ];
 
@@ -49,7 +49,7 @@ export default function Home() {
                   <img 
                     src={slide.image} 
                     alt={slide.title}
-                    className={`absolute inset-0 w-full h-full object-cover ${index < 2 ? 'opacity-100' : 'opacity-60'}`}
+                    className={`absolute inset-0 w-full h-full object-cover ${index < 3 ? 'opacity-100' : 'opacity-60'}`}
                   />
                   {slide.title && (
                     <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40 to-transparent flex items-center justify-center text-center">
