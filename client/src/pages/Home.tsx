@@ -143,30 +143,30 @@ export default function Home() {
                       key={platform.id}
                       className="embla__slide flex-[0_0_100%] md:flex-[0_0_calc(50%-1rem)] lg:flex-[0_0_calc(33.333%-1.33rem)] min-w-0"
                     >
-                      <div className={`group bg-gray-800/50 backdrop-blur-sm p-8 rounded-2xl border border-gray-700 hover:${colors.border} transition-all duration-300 hover:-translate-y-2 flex flex-col h-full shadow-xl overflow-hidden relative`}>
-                        {/* Circle Logo Frame */}
-                        <div className="mb-6 relative h-40 flex items-center justify-center">
-                          <div className={`w-40 h-40 rounded-full border-4 border-${platform.color}-500/30 flex items-center justify-center bg-gray-900/50`}>
+                      <div className={`group bg-gray-800/50 backdrop-blur-sm p-5 rounded-xl border border-gray-700 hover:${colors.border} transition-all duration-300 hover:-translate-y-2 flex flex-col h-full shadow-xl overflow-hidden relative`}>
+                        {/* App Icon Frame (512x512 ratio) */}
+                        <div className="mb-6 relative flex items-center justify-center">
+                          <div className={`w-32 h-32 rounded-2xl border-2 border-${platform.color}-500/30 flex items-center justify-center bg-gray-900/50`}>
                             <img 
                               src={platform.logo} 
                               alt={platform.name} 
-                              className="h-24 w-24 object-contain animate-float" 
+                              className="h-20 w-20 object-contain animate-float" 
                             />
                           </div>
                         </div>
-                        <h3 className={`text-2xl font-bold mb-4 text-white ${colors.hover} transition-colors`}>
+                        <h3 className={`text-lg font-bold mb-3 text-white ${colors.hover} transition-colors`}>
                           {platform.name}
                         </h3>
-                        <p className="text-gray-400 mb-4 leading-relaxed flex-grow">
+                        <p className="text-gray-400 mb-3 leading-relaxed flex-grow text-sm">
                           {platform.description}
                         </p>
                         
                         {/* Unit Price Information */}
-                        <div className="mb-6 p-4 bg-gray-900/50 rounded-lg border border-gray-700">
-                          <p className="text-sm text-gray-300 font-semibold">
+                        <div className="mb-4 p-3 bg-gray-900/50 rounded-lg border border-gray-700">
+                          <p className="text-xs text-gray-300 font-semibold">
                             {platform.unit}
                           </p>
-                          <p className="text-xs text-gray-500 mt-1">
+                          <p className="text-[10px] text-gray-500 mt-0.5">
                             {platform.unitLabel}
                           </p>
                         </div>
