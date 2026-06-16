@@ -15,7 +15,7 @@ export interface SEOMetadata {
   twitterCard: string;
 }
 
-const BASE_URL = "https://goal24mm.com";
+const BASE_URL = "https://goal24mm.vercel.app";
 const DEFAULT_OG_IMAGE = `${BASE_URL}/og-image.jpg`;
 const SITE_NAME = "Goal24MM";
 const TWITTER_HANDLE = "@Goal24MM";
