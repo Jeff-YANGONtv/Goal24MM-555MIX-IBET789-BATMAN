@@ -146,7 +146,7 @@ export default function Home() {
                       <div className={`group bg-gray-800/50 backdrop-blur-sm p-3 rounded-xl border border-gray-700 hover:${colors.border} transition-all duration-300 hover:-translate-y-2 flex flex-col h-full shadow-xl overflow-hidden relative`}>
                         {/* App Icon Frame (512x512 ratio) */}
                         <div className="mb-3 relative flex items-center justify-center">
-                          <div className={`w-24 h-24 rounded-lg border-2 border-${platform.color}-500/30 flex items-center justify-center bg-gray-900/50`}>
+                          <div className={`w-24 h-24 rounded-full border-2 border-${platform.color}-500/30 flex items-center justify-center bg-gray-900/50`}>
                             <img 
                               src={platform.logo} 
                               alt={platform.name} 
