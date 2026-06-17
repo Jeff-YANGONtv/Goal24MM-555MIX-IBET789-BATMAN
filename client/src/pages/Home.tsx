@@ -3,6 +3,7 @@ import { Send, Phone } from "lucide-react";
 import { Helmet } from "react-helmet-async";
 import Navbar from "../components/Navbar";
 import { altTextGenerator, imageOptimizationConfig } from "../lib/imageOptimization";
+import { generateOrganizationSchema } from "../lib/seo";
 
 export default function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -72,6 +73,9 @@ export default function Home() {
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Goal24MM - 555mix, ibet789, batman" />
         <meta name="twitter:description" content={seoDescription} />
+        <script type="application/ld+json">
+          {JSON.stringify(generateOrganizationSchema())}
+        </script>
       </Helmet>
       {/* Navigation Bar */}
       <Navbar />

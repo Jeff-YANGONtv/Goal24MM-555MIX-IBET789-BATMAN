@@ -43,14 +43,11 @@ export function getSitemapEntries(baseUrl: string): SitemapEntry[] {
     },
   ];
 
-  // Team pages - SEO optimized for Goal24MM, 555mix, ibet789, batman, slot
-  const teams = [
-    "arsenal-fc",
-    "manchester-united",
-    "liverpool-fc",
-    "manchester-city",
-    "chelsea-fc",
-  ];
+  // In a real application, these would be imported from the data layer
+  // For now, we use the predefined slugs to ensure they match the data.ts
+  
+  // Team pages
+  const teams = ["arsenal-fc", "manchester-united", "liverpool-fc", "manchester-city", "chelsea-fc"];
   teams.forEach((team) => {
     entries.push({
       loc: `${baseUrl}/team/${team}`,
@@ -61,7 +58,7 @@ export function getSitemapEntries(baseUrl: string): SitemapEntry[] {
   });
 
   // League pages
-  const leagues = ["premier-league", "la-liga", "serie-a", "bundesliga", "ligue-1"];
+  const leagues = ["premier-league", "la-liga", "serie-a", "bundesliga"];
   leagues.forEach((league) => {
     entries.push({
       loc: `${baseUrl}/league/${league}`,
@@ -72,11 +69,7 @@ export function getSitemapEntries(baseUrl: string): SitemapEntry[] {
   });
 
   // World Cup pages
-  const worldCupStages = [
-    "fifa-2026-group-stage",
-    "fifa-2026-knockout-stage",
-    "fifa-2026-finals",
-  ];
+  const worldCupStages = ["fifa-2026-group-stage", "fifa-2026-quarter-finals", "fifa-2026-semi-finals", "fifa-2026-final"];
   worldCupStages.forEach((stage) => {
     entries.push({
       loc: `${baseUrl}/worldcup/${stage}`,
@@ -86,20 +79,25 @@ export function getSitemapEntries(baseUrl: string): SitemapEntry[] {
     });
   });
 
-  // Betting pages - Goal24MM, 555mix, ibet789, batman, slot
-  const bettingPages = [
-    "555mix-betting-guide",
-    "ibet789-betting-guide",
-    "batman-betting-guide",
-    "slot-games-guide",
-    "sports-betting-tips",
-  ];
+  // Betting pages
+  const bettingPages = ["555mix-betting-guide", "ibet-betting-guide", "football-betting-strategies"];
   bettingPages.forEach((page) => {
     entries.push({
       loc: `${baseUrl}/bet/${page}`,
       lastmod: today,
       changefreq: "weekly",
       priority: 0.8,
+    });
+  });
+
+  // Match pages
+  const matches = ["arsenal-vs-manchester-united", "liverpool-vs-manchester-city"];
+  matches.forEach((match) => {
+    entries.push({
+      loc: `${baseUrl}/match/${match}`,
+      lastmod: today,
+      changefreq: "daily",
+      priority: 0.7,
     });
   });
 

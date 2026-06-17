@@ -3,7 +3,7 @@ Allow: /
 Disallow: /admin/
 Disallow: /private/
 
-Sitemap: https://goal24mm.com/sitemap.xml
+Sitemap: https://goal24mm-555mix-ibet-batman.vercel.app/sitemap.xml
 
 # Crawl delay (in seconds)
 Crawl-delay: 1
