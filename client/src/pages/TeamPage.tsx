@@ -1,6 +1,6 @@
-import { useParams } from "wouter";
+import { useEffect, useState } from "react";
 import { ArrowLeft } from "lucide-react";
-import { getTeamBySlug, getAllTeamSlugs } from "@/lib/data";
+import { getTeamBySlug, Team } from "@/lib/data";
 import { generateSEOMetadata, generateArticleSchema } from "@/lib/seo";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -12,7 +12,26 @@ interface TeamPageProps {
 }
 
 export default function TeamPage({ slug }: TeamPageProps) {
-  const team = getTeamBySlug(slug);
+  const [team, setTeam] = useState<Team | undefined>(undefined);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchData() {
+      setLoading(true);
+      const data = await getTeamBySlug(slug);
+      setTeam(data);
+      setLoading(false);
+    }
+    fetchData();
+  }, [slug]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+      </div>
+    );
+  }
 
   if (!team) {
     return (
@@ -135,18 +154,6 @@ export default function TeamPage({ slug }: TeamPageProps) {
                 <span className="text-gray-700">Passionate fanbase and strong community engagement</span>
               </li>
             </ul>
-
-            <h2 className="text-3xl font-bold text-gray-900 mb-6 mt-12">Related Teams</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <a href="/team/manchester-united" className="p-4 border border-gray-200 rounded-lg hover:border-blue-300 hover:bg-blue-50 transition-colors">
-                <p className="font-semibold text-gray-900">Manchester United</p>
-                <p className="text-sm text-gray-600">Premier League</p>
-              </a>
-              <a href="/team/liverpool-fc" className="p-4 border border-gray-200 rounded-lg hover:border-blue-300 hover:bg-blue-50 transition-colors">
-                <p className="font-semibold text-gray-900">Liverpool FC</p>
-                <p className="text-sm text-gray-600">Premier League</p>
-              </a>
-            </div>
           </div>
         </div>
       </section>
