@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { Send, Phone } from "lucide-react";
+import { Send, Phone, ChevronRight } from "lucide-react";
 import { Helmet } from "react-helmet-async";
 import Navbar from "../components/Navbar";
 import { altTextGenerator, imageOptimizationConfig } from "../lib/imageOptimization";
 import { generateOrganizationSchema } from "../lib/seo";
+import { getBettingPages, BettingPage } from "../lib/data";
 
 export default function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [bettingGuides, setBettingGuides] = useState<BettingPage[]>([]);
+  const [loading, setLoading] = useState(true);
 
   // SEO Keywords for Goal24MM, 555mix, ibet789, batman, slot
   const seoKeywords = "Goal24MM, 555mix, ibet789, batman, slot, online gaming, betting platform, sports betting, casino games, online slots";
@@ -42,6 +45,20 @@ export default function Home() {
       color: "yellow"
     }
   ];
+
+  useEffect(() => {
+    const fetchGuides = async () => {
+      try {
+        const data = await getBettingPages();
+        setBettingGuides(data);
+      } catch (error) {
+        console.error("Error fetching betting guides:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchGuides();
+  }, []);
 
   const paymentMethods = [
     "https://user13973.na.imgto.link/public/20260614/1000030839.avif",
@@ -152,6 +169,53 @@ export default function Home() {
               <i className="fas fa-telegram-plane"></i> Telegram
             </a>
           </div>
+        </div>
+
+        {/* Dynamic Betting Guides Section */}
+        <div className="max-w-3xl mx-auto px-4 mb-12">
+          <div className="flex justify-between items-center mb-6">
+            <h2 className="text-xl font-bold text-yellow-400">Betting Guides & Tips</h2>
+            {!loading && bettingGuides.length > 0 && (
+              <span className="text-[10px] text-gray-500">{bettingGuides.length} guides available</span>
+            )}
+          </div>
+          
+          {loading ? (
+            <div className="flex justify-center py-12">
+              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-yellow-400"></div>
+            </div>
+          ) : bettingGuides.length > 0 ? (
+            <div className="grid grid-cols-1 gap-4">
+              {bettingGuides.map((guide) => (
+                <a
+                  key={guide.slug}
+                  href={`/bet/${guide.slug}`}
+                  className="group bg-gray-900/40 p-4 rounded-xl border border-gray-800 hover:border-yellow-500/50 transition-all flex items-center justify-between"
+                >
+                  <div className="flex items-center gap-4">
+                    {guide.imageUrl ? (
+                      <img src={guide.imageUrl} alt={guide.title} className="w-12 h-12 rounded-lg object-cover" />
+                    ) : (
+                      <div className="w-12 h-12 rounded-lg bg-gray-800 flex items-center justify-center text-yellow-500 font-bold">
+                        {guide.title.charAt(0)}
+                      </div>
+                    )}
+                    <div>
+                      <h3 className="text-sm font-bold text-white group-hover:text-yellow-400 transition-colors">
+                        {guide.title}
+                      </h3>
+                      <p className="text-[10px] text-gray-500 line-clamp-1">{guide.description}</p>
+                    </div>
+                  </div>
+                  <ChevronRight size={16} className="text-gray-600 group-hover:text-yellow-400" />
+                </a>
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-12 bg-gray-900/20 rounded-xl border border-dashed border-gray-800">
+              <p className="text-gray-500 text-sm">No betting guides available yet.</p>
+            </div>
+          )}
         </div>
 
         {/* Payment Icons - SEO Rich - At the bottom */}

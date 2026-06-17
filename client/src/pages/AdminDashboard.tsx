@@ -69,7 +69,42 @@ type ContentType = 'teams' | 'leagues' | 'worldcup_stages' | 'betting_pages' | '
 type ContentData = TeamData | LeagueData | WorldCupStageData | BettingPageData | MatchData;
 
 export default function AdminDashboard() {
+  const [user, setUser] = useState<any>(null);
+  const [authLoading, setAuthLoading] = useState(true);
   const [activeTab, setActiveTab] = useState<ContentType>('teams');
+
+  useEffect(() => {
+    // Check current session
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setUser(session?.user ?? null);
+      setAuthLoading(false);
+    });
+
+    // Listen for auth changes
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null);
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
+
+  const handleLogin = async () => {
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: 'google',
+      options: {
+        redirectTo: window.location.origin + '/admin'
+      }
+    });
+    if (error) toast.error('Login failed: ' + error.message);
+  };
+
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    toast.success('Logged out');
+  };
+
+  const ALLOWED_EMAIL = 'jeff372001@gmail.com';
+  const isAuthorized = user?.email === ALLOWED_EMAIL;
   const [data, setData] = useState<ContentData[]>([]);
   const [loading, setLoading] = useState(true);
   const [isFormOpen, setIsFormOpen] = useState(false);
@@ -335,10 +370,57 @@ export default function AdminDashboard() {
     );
   };
 
+  if (authLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+          <p className="text-gray-600">Verifying access...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (!user) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="bg-white p-8 rounded-lg shadow-md max-w-md w-full text-center">
+          <h1 className="text-2xl font-bold mb-6">Admin Login</h1>
+          <p className="text-gray-600 mb-8">Please sign in to access the dashboard.</p>
+          <Button onClick={handleLogin} className="w-full py-6 text-lg">
+            Sign in with Google
+          </Button>
+        </div>
+      </div>
+    );
+  }
+
+  if (!isAuthorized) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="bg-white p-8 rounded-lg shadow-md max-w-md w-full text-center border-t-4 border-red-500">
+          <h1 className="text-2xl font-bold mb-4 text-red-600">Access Denied</h1>
+          <p className="text-gray-600 mb-6">
+            Your account ({user.email}) does not have permission to access this dashboard.
+          </p>
+          <Button variant="outline" onClick={handleLogout} className="w-full">
+            Sign out
+          </Button>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-gray-50 p-8">
       <div className="max-w-7xl mx-auto">
-        <h1 className="text-3xl font-bold text-gray-900 mb-8">Admin Dashboard</h1>
+        <div className="flex justify-between items-center mb-8">
+          <h1 className="text-3xl font-bold text-gray-900">Admin Dashboard</h1>
+          <div className="flex items-center gap-4">
+            <span className="text-sm text-gray-600">{user.email}</span>
+            <Button variant="outline" size="sm" onClick={handleLogout}>Logout</Button>
+          </div>
+        </div>
 
         <Tabs value={activeTab} onValueChange={(value) => setActiveTab(value as ContentType)} className="w-full">
           <TabsList className="grid w-full grid-cols-5 mb-8">
