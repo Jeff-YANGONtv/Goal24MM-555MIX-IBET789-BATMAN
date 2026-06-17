@@ -1,5 +1,6 @@
+import { useEffect, useState } from "react";
 import { ArrowLeft } from "lucide-react";
-import { getBettingPageBySlug } from "@/lib/data";
+import { getBettingPageBySlug, BettingPage as BettingPageType } from "@/lib/data";
 import { generateSEOMetadata, generateArticleSchema } from "@/lib/seo";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -11,14 +12,51 @@ interface BettingPageProps {
 }
 
 export default function BettingPage({ slug }: BettingPageProps) {
-  const page = getBettingPageBySlug(slug);
+  const [page, setPage] = useState<BettingPageType | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-  if (!page) {
+  useEffect(() => {
+    const fetchPage = async () => {
+      setLoading(true);
+      setError(null);
+      try {
+        const data = await getBettingPageBySlug(slug);
+        if (!data) {
+          setError('Betting guide not found');
+          setPage(null);
+        } else {
+          setPage(data);
+        }
+      } catch (err) {
+        console.error('Error fetching betting page:', err);
+        setError('Failed to load betting guide');
+        setPage(null);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchPage();
+  }, [slug]);
+
+  if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center bg-white">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+          <p className="text-gray-600">Loading betting guide...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (error || !page) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-white">
         <div className="text-center">
           <h1 className="text-4xl font-bold text-gray-900 mb-4">Betting Guide Not Found</h1>
-          <p className="text-gray-600 mb-8">The betting guide you're looking for doesn't exist.</p>
+          <p className="text-gray-600 mb-8">The betting guide you're looking for doesn't exist or could not be loaded.</p>
           <a href="/"><Button>Back to Home</Button></a>
         </div>
       </div>

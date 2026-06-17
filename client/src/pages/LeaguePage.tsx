@@ -1,6 +1,7 @@
+import { useEffect, useState } from "react";
 import { useParams } from "wouter";
 import { ArrowLeft } from "lucide-react";
-import { getLeagueBySlug } from "@/lib/data";
+import { getLeagueBySlug, League } from "@/lib/data";
 import { generateSEOMetadata, generateArticleSchema } from "@/lib/seo";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -12,14 +13,51 @@ interface LeaguePageProps {
 }
 
 export default function LeaguePage({ slug }: LeaguePageProps) {
-  const league = getLeagueBySlug(slug);
+  const [league, setLeague] = useState<League | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-  if (!league) {
+  useEffect(() => {
+    const fetchLeague = async () => {
+      setLoading(true);
+      setError(null);
+      try {
+        const data = await getLeagueBySlug(slug);
+        if (!data) {
+          setError('League not found');
+          setLeague(null);
+        } else {
+          setLeague(data);
+        }
+      } catch (err) {
+        console.error('Error fetching league:', err);
+        setError('Failed to load league');
+        setLeague(null);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchLeague();
+  }, [slug]);
+
+  if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center bg-white">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+          <p className="text-gray-600">Loading league...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (error || !league) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-white">
         <div className="text-center">
           <h1 className="text-4xl font-bold text-gray-900 mb-4">League Not Found</h1>
-          <p className="text-gray-600 mb-8">The league you're looking for doesn't exist.</p>
+          <p className="text-gray-600 mb-8">The league you're looking for doesn't exist or could not be loaded.</p>
           <a href="/">
             <Button>Back to Home</Button>
           </a>
@@ -62,7 +100,7 @@ export default function LeaguePage({ slug }: LeaguePageProps) {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
             <div className="bg-white rounded-lg p-6 border border-gray-200">
               <p className="text-gray-600 text-sm mb-2">Country</p>
-              <p className="text-2xl font-bold text-gray-900">{league.country}</p>
+              <p className="text-2xl font-bold text-gray-900">{league.country || 'N/A'}</p>
             </div>
             <div className="bg-white rounded-lg p-6 border border-gray-200">
               <p className="text-gray-600 text-sm mb-2">Tier</p>

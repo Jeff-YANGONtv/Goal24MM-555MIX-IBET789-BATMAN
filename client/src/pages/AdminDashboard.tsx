@@ -3,6 +3,7 @@ import { supabase } from '@/lib/supabase';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { toast } from 'sonner';
 import { Trash2, Edit2, Plus } from 'lucide-react';
 
@@ -18,35 +19,92 @@ interface TeamData {
   stadium?: string;
 }
 
+interface LeagueData {
+  id: string;
+  slug: string;
+  title: string;
+  description: string;
+  keywords: string[];
+  content: string;
+  image_url?: string;
+  country?: string;
+}
+
+interface WorldCupStageData {
+  id: string;
+  slug: string;
+  title: string;
+  description: string;
+  keywords: string[];
+  content: string;
+  image_url?: string;
+  year?: number;
+  stage?: string;
+}
+
+interface BettingPageData {
+  id: string;
+  slug: string;
+  title: string;
+  description: string;
+  keywords: string[];
+  content: string;
+  image_url?: string;
+  platform?: string;
+}
+
+interface MatchData {
+  id: string;
+  slug: string;
+  title: string;
+  description: string;
+  keywords: string[];
+  content: string;
+  image_url?: string;
+  date?: string;
+  teams?: string[];
+}
+
+type ContentType = 'teams' | 'leagues' | 'worldcup_stages' | 'betting_pages' | 'matches';
+type ContentData = TeamData | LeagueData | WorldCupStageData | BettingPageData | MatchData;
+
 export default function AdminDashboard() {
-  const [teams, setTeams] = useState<TeamData[]>([]);
+  const [activeTab, setActiveTab] = useState<ContentType>('teams');
+  const [data, setData] = useState<ContentData[]>([]);
   const [loading, setLoading] = useState(true);
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
-  const [formData, setFormData] = useState({
-    slug: '',
-    title: '',
-    description: '',
-    keywords: '',
-    content: '',
-    image_url: '',
-    founded: '',
-    stadium: '',
-  });
+  const [formData, setFormData] = useState<Record<string, any>>({});
+
+  const tableConfigs: Record<ContentType, { label: string; fields: string[] }> = {
+    teams: { label: 'Teams', fields: ['title', 'slug', 'stadium', 'founded'] },
+    leagues: { label: 'Leagues', fields: ['title', 'slug', 'country'] },
+    worldcup_stages: { label: 'World Cup Stages', fields: ['title', 'slug', 'year', 'stage'] },
+    betting_pages: { label: 'Betting Pages', fields: ['title', 'slug', 'platform'] },
+    matches: { label: 'Matches', fields: ['title', 'slug', 'date'] },
+  };
+
+  const formFields: Record<ContentType, string[]> = {
+    teams: ['slug', 'title', 'description', 'keywords', 'content', 'image_url', 'founded', 'stadium'],
+    leagues: ['slug', 'title', 'description', 'keywords', 'content', 'image_url', 'country'],
+    worldcup_stages: ['slug', 'title', 'description', 'keywords', 'content', 'image_url', 'year', 'stage'],
+    betting_pages: ['slug', 'title', 'description', 'keywords', 'content', 'image_url', 'platform'],
+    matches: ['slug', 'title', 'description', 'keywords', 'content', 'image_url', 'date', 'teams'],
+  };
 
   useEffect(() => {
-    fetchTeams();
-  }, []);
+    fetchData();
+  }, [activeTab]);
 
-  const fetchTeams = async () => {
+  const fetchData = async () => {
     setLoading(true);
     try {
-      const { data, error } = await supabase.from('teams').select('*');
+      const { data: fetchedData, error } = await supabase.from(activeTab).select('*');
       if (error) throw error;
-      setTeams(data || []);
+      setData(fetchedData || []);
     } catch (error) {
-      console.error('Error fetching teams:', error);
-      toast.error('Failed to fetch teams');
+      console.error(`Error fetching ${activeTab}:`, error);
+      toast.error(`Failed to fetch ${activeTab}`);
     } finally {
       setLoading(false);
     }
@@ -54,299 +112,332 @@ export default function AdminDashboard() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!formData.slug || !formData.title) {
       toast.error('Slug and Title are required');
       return;
     }
 
     try {
-      const payload = {
-        slug: formData.slug,
-        title: formData.title,
-        description: formData.description,
-        keywords: formData.keywords.split(',').map(k => k.trim()),
-        content: formData.content,
-        image_url: formData.image_url || null,
-        founded: formData.founded ? parseInt(formData.founded) : null,
-        stadium: formData.stadium || null,
-      };
+      const payload = preparePayload();
 
       if (editingId) {
         const { error } = await supabase
-          .from('teams')
+          .from(activeTab)
           .update(payload)
           .eq('id', editingId);
         if (error) throw error;
-        toast.success('Team updated successfully');
+        toast.success(`${tableConfigs[activeTab].label.slice(0, -1)} updated successfully`);
       } else {
-        const { error } = await supabase
-          .from('teams')
-          .insert([payload]);
+        const { error } = await supabase.from(activeTab).insert([payload]);
         if (error) throw error;
-        toast.success('Team created successfully');
+        toast.success(`${tableConfigs[activeTab].label.slice(0, -1)} created successfully`);
       }
 
       resetForm();
-      fetchTeams();
+      fetchData();
     } catch (error) {
-      console.error('Error saving team:', error);
-      toast.error('Failed to save team');
+      console.error(`Error saving ${activeTab}:`, error);
+      toast.error(`Failed to save ${tableConfigs[activeTab].label.slice(0, -1)}`);
     }
   };
 
-  const handleEdit = (team: TeamData) => {
-    setFormData({
-      slug: team.slug,
-      title: team.title,
-      description: team.description,
-      keywords: team.keywords.join(', '),
-      content: team.content,
-      image_url: team.image_url || '',
-      founded: team.founded?.toString() || '',
-      stadium: team.stadium || '',
-    });
-    setEditingId(team.id);
+  const preparePayload = () => {
+    const payload: Record<string, any> = {
+      slug: formData.slug,
+      title: formData.title,
+      description: formData.description || '',
+      keywords: formData.keywords ? formData.keywords.split(',').map((k: string) => k.trim()) : [],
+      content: formData.content || '',
+      image_url: formData.image_url || null,
+    };
+
+    if (activeTab === 'teams') {
+      payload.founded = formData.founded ? parseInt(formData.founded) : null;
+      payload.stadium = formData.stadium || null;
+    } else if (activeTab === 'leagues') {
+      payload.country = formData.country || null;
+    } else if (activeTab === 'worldcup_stages') {
+      payload.year = formData.year ? parseInt(formData.year) : null;
+      payload.stage = formData.stage || null;
+    } else if (activeTab === 'betting_pages') {
+      payload.platform = formData.platform || null;
+    } else if (activeTab === 'matches') {
+      payload.date = formData.date || null;
+      payload.teams = formData.teams ? formData.teams.split(',').map((t: string) => t.trim()) : [];
+    }
+
+    return payload;
+  };
+
+  const handleEdit = (item: ContentData) => {
+    const editData: Record<string, any> = {
+      slug: item.slug,
+      title: item.title,
+      description: item.description,
+      keywords: item.keywords?.join(', ') || '',
+      content: item.content,
+      image_url: item.image_url || '',
+    };
+
+    if (activeTab === 'teams' && 'founded' in item) {
+      editData.founded = item.founded?.toString() || '';
+      editData.stadium = item.stadium || '';
+    } else if (activeTab === 'leagues' && 'country' in item) {
+      editData.country = item.country || '';
+    } else if (activeTab === 'worldcup_stages' && 'year' in item) {
+      editData.year = item.year?.toString() || '';
+      editData.stage = item.stage || '';
+    } else if (activeTab === 'betting_pages' && 'platform' in item) {
+      editData.platform = item.platform || '';
+    } else if (activeTab === 'matches' && 'date' in item) {
+      editData.date = item.date || '';
+      editData.teams = item.teams?.join(', ') || '';
+    }
+
+    setFormData(editData);
+    setEditingId(item.id);
     setIsFormOpen(true);
   };
 
   const handleDelete = async (id: string) => {
-    if (!confirm('Are you sure you want to delete this team?')) return;
-    
+    if (!confirm(`Are you sure you want to delete this ${tableConfigs[activeTab].label.slice(0, -1).toLowerCase()}?`)) return;
+
     try {
-      const { error } = await supabase.from('teams').delete().eq('id', id);
+      const { error } = await supabase.from(activeTab).delete().eq('id', id);
       if (error) throw error;
-      toast.success('Team deleted successfully');
-      fetchTeams();
+      toast.success(`${tableConfigs[activeTab].label.slice(0, -1)} deleted successfully`);
+      fetchData();
     } catch (error) {
-      console.error('Error deleting team:', error);
-      toast.error('Failed to delete team');
+      console.error(`Error deleting from ${activeTab}:`, error);
+      toast.error(`Failed to delete ${tableConfigs[activeTab].label.slice(0, -1)}`);
     }
   };
 
   const resetForm = () => {
-    setFormData({
-      slug: '',
-      title: '',
-      description: '',
-      keywords: '',
-      content: '',
-      image_url: '',
-      founded: '',
-      stadium: '',
-    });
+    setFormData({});
     setEditingId(null);
     setIsFormOpen(false);
   };
 
+  const renderFormField = (fieldName: string) => {
+    const label = fieldName.charAt(0).toUpperCase() + fieldName.slice(1).replace(/_/g, ' ');
+    const isRequired = fieldName === 'slug' || fieldName === 'title';
+
+    if (fieldName === 'content') {
+      return (
+        <div key={fieldName}>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            {label} {isRequired && '*'}
+          </label>
+          <Textarea
+            value={formData[fieldName] || ''}
+            onChange={(e) => setFormData({ ...formData, [fieldName]: e.target.value })}
+            placeholder={`Enter ${label.toLowerCase()}`}
+            rows={4}
+          />
+        </div>
+      );
+    }
+
+    if (fieldName === 'keywords' || fieldName === 'teams') {
+      return (
+        <div key={fieldName}>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            {label} (comma-separated)
+          </label>
+          <Input
+            value={formData[fieldName] || ''}
+            onChange={(e) => setFormData({ ...formData, [fieldName]: e.target.value })}
+            placeholder={`e.g., item1, item2, item3`}
+          />
+        </div>
+      );
+    }
+
+    if (fieldName === 'founded' || fieldName === 'year') {
+      return (
+        <div key={fieldName}>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            {label}
+          </label>
+          <Input
+            type="number"
+            value={formData[fieldName] || ''}
+            onChange={(e) => setFormData({ ...formData, [fieldName]: e.target.value })}
+            placeholder={`Enter ${label.toLowerCase()}`}
+          />
+        </div>
+      );
+    }
+
+    if (fieldName === 'slug' && editingId) {
+      return (
+        <div key={fieldName}>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            {label} {isRequired && '*'}
+          </label>
+          <Input
+            value={formData[fieldName] || ''}
+            disabled
+            placeholder={`e.g., ${fieldName}`}
+          />
+        </div>
+      );
+    }
+
+    return (
+      <div key={fieldName}>
+        <label className="block text-sm font-medium text-gray-700 mb-1">
+          {label} {isRequired && '*'}
+        </label>
+        <Input
+          value={formData[fieldName] || ''}
+          onChange={(e) => setFormData({ ...formData, [fieldName]: e.target.value })}
+          placeholder={`Enter ${label.toLowerCase()}`}
+        />
+      </div>
+    );
+  };
+
+  const renderTableRow = (item: ContentData) => {
+    const config = tableConfigs[activeTab];
+    return (
+      <tr key={item.id} className="border-b hover:bg-gray-50">
+        {config.fields.map((field) => (
+          <td key={field} className="px-6 py-4 text-sm text-gray-900">
+            {item[field as keyof ContentData] ? String(item[field as keyof ContentData]) : '-'}
+          </td>
+        ))}
+        <td className="px-6 py-4 text-right">
+          <div className="flex justify-end gap-2">
+            <Button
+              size="sm"
+              variant="outline"
+              onClick={() => handleEdit(item)}
+              className="flex items-center gap-1"
+            >
+              <Edit2 size={16} />
+              Edit
+            </Button>
+            <Button
+              size="sm"
+              variant="destructive"
+              onClick={() => handleDelete(item.id)}
+              className="flex items-center gap-1"
+            >
+              <Trash2 size={16} />
+              Delete
+            </Button>
+          </div>
+        </td>
+      </tr>
+    );
+  };
+
   return (
     <div className="min-h-screen bg-gray-50 p-8">
-      <div className="max-w-6xl mx-auto">
-        <div className="flex justify-between items-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">Admin Dashboard - Teams</h1>
-          <Button
-            onClick={() => {
-              resetForm();
-              setIsFormOpen(true);
-            }}
-            className="flex items-center gap-2"
-          >
-            <Plus size={20} />
-            Add Team
-          </Button>
-        </div>
+      <div className="max-w-7xl mx-auto">
+        <h1 className="text-3xl font-bold text-gray-900 mb-8">Admin Dashboard</h1>
 
-        {/* Form Section */}
-        {isFormOpen && (
-          <div className="bg-white rounded-lg shadow-md p-6 mb-8">
-            <h2 className="text-xl font-bold mb-4">
-              {editingId ? 'Edit Team' : 'Add New Team'}
-            </h2>
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Slug *
-                  </label>
-                  <Input
-                    value={formData.slug}
-                    onChange={(e) => setFormData({ ...formData, slug: e.target.value })}
-                    placeholder="e.g., arsenal-fc"
-                    disabled={!!editingId}
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Title *
-                  </label>
-                  <Input
-                    value={formData.title}
-                    onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                    placeholder="Team name"
-                  />
-                </div>
-              </div>
+        <Tabs value={activeTab} onValueChange={(value) => setActiveTab(value as ContentType)} className="w-full">
+          <TabsList className="grid w-full grid-cols-5 mb-8">
+            <TabsTrigger value="teams">Teams</TabsTrigger>
+            <TabsTrigger value="leagues">Leagues</TabsTrigger>
+            <TabsTrigger value="worldcup_stages">World Cup</TabsTrigger>
+            <TabsTrigger value="betting_pages">Betting</TabsTrigger>
+            <TabsTrigger value="matches">Matches</TabsTrigger>
+          </TabsList>
 
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Description
-                </label>
-                <Input
-                  value={formData.description}
-                  onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                  placeholder="Brief description"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Keywords (comma-separated)
-                </label>
-                <Input
-                  value={formData.keywords}
-                  onChange={(e) => setFormData({ ...formData, keywords: e.target.value })}
-                  placeholder="keyword1, keyword2, keyword3"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Content
-                </label>
-                <Textarea
-                  value={formData.content}
-                  onChange={(e) => setFormData({ ...formData, content: e.target.value })}
-                  placeholder="Team content and details"
-                  rows={4}
-                />
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Image URL
-                  </label>
-                  <Input
-                    value={formData.image_url}
-                    onChange={(e) => setFormData({ ...formData, image_url: e.target.value })}
-                    placeholder="https://..."
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Founded Year
-                  </label>
-                  <Input
-                    value={formData.founded}
-                    onChange={(e) => setFormData({ ...formData, founded: e.target.value })}
-                    placeholder="1886"
-                    type="number"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Stadium
-                  </label>
-                  <Input
-                    value={formData.stadium}
-                    onChange={(e) => setFormData({ ...formData, stadium: e.target.value })}
-                    placeholder="Stadium name"
-                  />
-                </div>
-              </div>
-
-              <div className="flex gap-2">
-                <Button type="submit">
-                  {editingId ? 'Update' : 'Create'}
-                </Button>
+          {Object.keys(tableConfigs).map((contentType) => (
+            <TabsContent key={contentType} value={contentType}>
+              <div className="flex justify-between items-center mb-6">
+                <h2 className="text-2xl font-bold text-gray-900">{tableConfigs[contentType as ContentType].label}</h2>
                 <Button
-                  type="button"
-                  variant="outline"
-                  onClick={resetForm}
+                  onClick={() => {
+                    resetForm();
+                    setIsFormOpen(true);
+                  }}
+                  className="flex items-center gap-2"
                 >
-                  Cancel
+                  <Plus size={20} />
+                  Add {tableConfigs[contentType as ContentType].label.slice(0, -1)}
                 </Button>
               </div>
-            </form>
-          </div>
-        )}
 
-        {/* Teams List */}
-        <div className="bg-white rounded-lg shadow-md overflow-hidden">
-          <div className="overflow-x-auto">
-            <table className="w-full">
-              <thead className="bg-gray-100 border-b">
-                <tr>
-                  <th className="px-6 py-3 text-left text-sm font-semibold text-gray-900">
-                    Title
-                  </th>
-                  <th className="px-6 py-3 text-left text-sm font-semibold text-gray-900">
-                    Slug
-                  </th>
-                  <th className="px-6 py-3 text-left text-sm font-semibold text-gray-900">
-                    Stadium
-                  </th>
-                  <th className="px-6 py-3 text-left text-sm font-semibold text-gray-900">
-                    Founded
-                  </th>
-                  <th className="px-6 py-3 text-right text-sm font-semibold text-gray-900">
-                    Actions
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {loading ? (
-                  <tr>
-                    <td colSpan={5} className="px-6 py-4 text-center text-gray-500">
-                      Loading...
-                    </td>
-                  </tr>
-                ) : teams.length === 0 ? (
-                  <tr>
-                    <td colSpan={5} className="px-6 py-4 text-center text-gray-500">
-                      No teams found. Create one to get started.
-                    </td>
-                  </tr>
-                ) : (
-                  teams.map((team) => (
-                    <tr key={team.id} className="border-b hover:bg-gray-50">
-                      <td className="px-6 py-4 text-sm text-gray-900">{team.title}</td>
-                      <td className="px-6 py-4 text-sm text-gray-600">{team.slug}</td>
-                      <td className="px-6 py-4 text-sm text-gray-600">
-                        {team.stadium || '-'}
-                      </td>
-                      <td className="px-6 py-4 text-sm text-gray-600">
-                        {team.founded || '-'}
-                      </td>
-                      <td className="px-6 py-4 text-right">
-                        <div className="flex justify-end gap-2">
-                          <Button
-                            size="sm"
-                            variant="outline"
-                            onClick={() => handleEdit(team)}
-                            className="flex items-center gap-1"
-                          >
-                            <Edit2 size={16} />
-                            Edit
-                          </Button>
-                          <Button
-                            size="sm"
-                            variant="destructive"
-                            onClick={() => handleDelete(team.id)}
-                            className="flex items-center gap-1"
-                          >
-                            <Trash2 size={16} />
-                            Delete
-                          </Button>
-                        </div>
-                      </td>
-                    </tr>
-                  ))
-                )}
-              </tbody>
-            </table>
-          </div>
-        </div>
+              {/* Form Section */}
+              {isFormOpen && (
+                <div className="bg-white rounded-lg shadow-md p-6 mb-8">
+                  <h3 className="text-xl font-bold mb-4">
+                    {editingId ? 'Edit' : 'Add New'} {tableConfigs[activeTab].label.slice(0, -1)}
+                  </h3>
+                  <form onSubmit={handleSubmit} className="space-y-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      {formFields[activeTab].map((field) => {
+                        if (field === 'content' || field === 'keywords' || field === 'teams') return null;
+                        return renderFormField(field);
+                      })}
+                    </div>
+
+                    {formFields[activeTab].includes('keywords') && renderFormField('keywords')}
+                    {formFields[activeTab].includes('teams') && renderFormField('teams')}
+                    {formFields[activeTab].includes('content') && renderFormField('content')}
+
+                    <div className="flex gap-2">
+                      <Button type="submit">
+                        {editingId ? 'Update' : 'Create'}
+                      </Button>
+                      <Button
+                        type="button"
+                        variant="outline"
+                        onClick={resetForm}
+                      >
+                        Cancel
+                      </Button>
+                    </div>
+                  </form>
+                </div>
+              )}
+
+              {/* Data Table */}
+              <div className="bg-white rounded-lg shadow-md overflow-hidden">
+                <div className="overflow-x-auto">
+                  <table className="w-full">
+                    <thead className="bg-gray-100 border-b">
+                      <tr>
+                        {tableConfigs[activeTab].fields.map((field) => (
+                          <th key={field} className="px-6 py-3 text-left text-sm font-semibold text-gray-900">
+                            {field.charAt(0).toUpperCase() + field.slice(1).replace(/_/g, ' ')}
+                          </th>
+                        ))}
+                        <th className="px-6 py-3 text-right text-sm font-semibold text-gray-900">
+                          Actions
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {loading ? (
+                        <tr>
+                          <td colSpan={tableConfigs[activeTab].fields.length + 1} className="px-6 py-4 text-center text-gray-500">
+                            Loading...
+                          </td>
+                        </tr>
+                      ) : data.length === 0 ? (
+                        <tr>
+                          <td colSpan={tableConfigs[activeTab].fields.length + 1} className="px-6 py-4 text-center text-gray-500">
+                            No {tableConfigs[activeTab].label.toLowerCase()} found. Create one to get started.
+                          </td>
+                        </tr>
+                      ) : (
+                        data.map((item) => renderTableRow(item))
+                      )}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </TabsContent>
+          ))}
+        </Tabs>
       </div>
     </div>
   );

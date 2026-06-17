@@ -12,6 +12,7 @@ import TeamPage from "./pages/TeamPage";
 import LeaguePage from "./pages/LeaguePage";
 import WorldCupPage from "./pages/WorldCupPage";
 import BettingPage from "./pages/BettingPage";
+import MatchPage from "./pages/MatchPage";
 import AdminDashboard from "./pages/AdminDashboard";
 
 
@@ -56,6 +57,7 @@ function Router() {
         <Route path={"/league/:slug"} component={({ params }) => <LeaguePage slug={params.slug} />} />
         <Route path={"/worldcup/:slug"} component={({ params }) => <WorldCupPage slug={params.slug} />} />
         <Route path={"/bet/:slug"} component={({ params }) => <BettingPage slug={params.slug} />} />
+        <Route path={"/match/:slug"} component={({ params }) => <MatchPage slug={params.slug} />} />
         <Route path={"/admin"} component={AdminDashboard} />
         <Route path={"/404"} component={NotFound} />
         {/* Final fallback route */}
