@@ -4,11 +4,26 @@ import { Helmet } from "react-helmet-async";
 import Navbar from "../components/Navbar";
 import { altTextGenerator, imageOptimizationConfig } from "../lib/imageOptimization";
 import { generateOrganizationSchema } from "../lib/seo";
-import { getBettingPages, BettingPage } from "../lib/data";
+import { 
+  getBettingPages, 
+  getTeams, 
+  getLeagues, 
+  getWorldCupStages, 
+  getMatches,
+  BettingPage,
+  Team,
+  League,
+  WorldCupStage,
+  Match
+} from "../lib/data";
 
 export default function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [bettingGuides, setBettingGuides] = useState<BettingPage[]>([]);
+  const [teams, setTeams] = useState<Team[]>([]);
+  const [leagues, setLeagues] = useState<League[]>([]);
+  const [wcStages, setWcStages] = useState<WorldCupStage[]>([]);
+  const [matches, setMatches] = useState<Match[]>([]);
   const [loading, setLoading] = useState(true);
 
   // SEO Keywords for Goal24MM, 555mix, ibet789, batman, slot
@@ -47,17 +62,28 @@ export default function Home() {
   ];
 
   useEffect(() => {
-    const fetchGuides = async () => {
+    const fetchAllData = async () => {
+      setLoading(true);
       try {
-        const data = await getBettingPages();
-        setBettingGuides(data);
+        const [bettingData, teamsData, leaguesData, wcData, matchesData] = await Promise.all([
+          getBettingPages(),
+          getTeams(),
+          getLeagues(),
+          getWorldCupStages(),
+          getMatches()
+        ]);
+        setBettingGuides(bettingData);
+        setTeams(teamsData);
+        setLeagues(leaguesData);
+        setWcStages(wcData);
+        setMatches(matchesData);
       } catch (error) {
-        console.error("Error fetching betting guides:", error);
+        console.error("Error fetching CMS data:", error);
       } finally {
         setLoading(false);
       }
     };
-    fetchGuides();
+    fetchAllData();
   }, []);
 
   const paymentMethods = [
@@ -171,50 +197,154 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Dynamic Betting Guides Section */}
-        <div className="max-w-3xl mx-auto px-4 mb-12">
-          <div className="flex justify-between items-center mb-6">
-            <h2 className="text-xl font-bold text-yellow-400">Betting Guides & Tips</h2>
-            {!loading && bettingGuides.length > 0 && (
-              <span className="text-[10px] text-gray-500">{bettingGuides.length} guides available</span>
-            )}
-          </div>
-          
+        {/* Dynamic Content Sections */}
+        <div className="max-w-3xl mx-auto px-4 space-y-12 mb-12">
           {loading ? (
             <div className="flex justify-center py-12">
               <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-yellow-400"></div>
             </div>
-          ) : bettingGuides.length > 0 ? (
-            <div className="grid grid-cols-1 gap-4">
-              {bettingGuides.map((guide) => (
-                <a
-                  key={guide.slug}
-                  href={`/bet/${guide.slug}`}
-                  className="group bg-gray-900/40 p-4 rounded-xl border border-gray-800 hover:border-yellow-500/50 transition-all flex items-center justify-between"
-                >
-                  <div className="flex items-center gap-4">
-                    {guide.imageUrl ? (
-                      <img src={guide.imageUrl} alt={guide.title} className="w-12 h-12 rounded-lg object-cover" />
-                    ) : (
-                      <div className="w-12 h-12 rounded-lg bg-gray-800 flex items-center justify-center text-yellow-500 font-bold">
-                        {guide.title.charAt(0)}
-                      </div>
-                    )}
-                    <div>
-                      <h3 className="text-sm font-bold text-white group-hover:text-yellow-400 transition-colors">
-                        {guide.title}
-                      </h3>
-                      <p className="text-[10px] text-gray-500 line-clamp-1">{guide.description}</p>
-                    </div>
-                  </div>
-                  <ChevronRight size={16} className="text-gray-600 group-hover:text-yellow-400" />
-                </a>
-              ))}
-            </div>
           ) : (
-            <div className="text-center py-12 bg-gray-900/20 rounded-xl border border-dashed border-gray-800">
-              <p className="text-gray-500 text-sm">No betting guides available yet.</p>
-            </div>
+            <>
+              {/* Matches Section */}
+              {matches.length > 0 && (
+                <section>
+                  <div className="flex justify-between items-center mb-6">
+                    <h2 className="text-xl font-bold text-yellow-400">Upcoming Matches</h2>
+                    <span className="text-[10px] text-gray-500">{matches.length} matches</span>
+                  </div>
+                  <div className="grid grid-cols-1 gap-4">
+                    {matches.map((match) => (
+                      <a
+                        key={match.slug}
+                        href={`/match/${match.slug}`}
+                        className="group bg-gray-900/40 p-4 rounded-xl border border-gray-800 hover:border-yellow-500/50 transition-all"
+                      >
+                        <div className="flex justify-between items-center mb-2">
+                          <span className="text-[10px] text-gray-500">{match.date}</span>
+                          <ChevronRight size={14} className="text-gray-600 group-hover:text-yellow-400" />
+                        </div>
+                        <h3 className="text-sm font-bold text-white group-hover:text-yellow-400 text-center">
+                          {match.title}
+                        </h3>
+                      </a>
+                    ))}
+                  </div>
+                </section>
+              )}
+
+              {/* Betting Guides Section */}
+              {bettingGuides.length > 0 && (
+                <section>
+                  <div className="flex justify-between items-center mb-6">
+                    <h2 className="text-xl font-bold text-yellow-400">Betting Guides & Tips</h2>
+                    <span className="text-[10px] text-gray-500">{bettingGuides.length} guides</span>
+                  </div>
+                  <div className="grid grid-cols-1 gap-4">
+                    {bettingGuides.map((guide) => (
+                      <a
+                        key={guide.slug}
+                        href={`/bet/${guide.slug}`}
+                        className="group bg-gray-900/40 p-4 rounded-xl border border-gray-800 hover:border-yellow-500/50 transition-all flex items-center justify-between"
+                      >
+                        <div className="flex items-center gap-4">
+                          {guide.imageUrl ? (
+                            <img src={guide.imageUrl} alt={guide.title} className="w-12 h-12 rounded-lg object-cover" />
+                          ) : (
+                            <div className="w-12 h-12 rounded-lg bg-gray-800 flex items-center justify-center text-yellow-500 font-bold">
+                              {guide.title.charAt(0)}
+                            </div>
+                          )}
+                          <div>
+                            <h3 className="text-sm font-bold text-white group-hover:text-yellow-400 transition-colors">
+                              {guide.title}
+                            </h3>
+                            <p className="text-[10px] text-gray-500 line-clamp-1">{guide.description}</p>
+                          </div>
+                        </div>
+                        <ChevronRight size={16} className="text-gray-600 group-hover:text-yellow-400" />
+                      </a>
+                    ))}
+                  </div>
+                </section>
+              )}
+
+              {/* Leagues Section */}
+              {leagues.length > 0 && (
+                <section>
+                  <div className="flex justify-between items-center mb-6">
+                    <h2 className="text-xl font-bold text-yellow-400">Football Leagues</h2>
+                  </div>
+                  <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                    {leagues.map((league) => (
+                      <a
+                        key={league.slug}
+                        href={`/league/${league.slug}`}
+                        className="group bg-gray-900/40 p-4 rounded-xl border border-gray-800 hover:border-yellow-500/50 transition-all text-center"
+                      >
+                        {league.imageUrl && (
+                          <img src={league.imageUrl} alt={league.title} className="w-12 h-12 mx-auto mb-2 object-contain" />
+                        )}
+                        <h3 className="text-[11px] font-bold text-white group-hover:text-yellow-400">
+                          {league.title}
+                        </h3>
+                        {league.country && <p className="text-[9px] text-gray-500">{league.country}</p>}
+                      </a>
+                    ))}
+                  </div>
+                </section>
+              )}
+
+              {/* Teams Section */}
+              {teams.length > 0 && (
+                <section>
+                  <div className="flex justify-between items-center mb-6">
+                    <h2 className="text-xl font-bold text-yellow-400">Featured Teams</h2>
+                  </div>
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    {teams.map((team) => (
+                      <a
+                        key={team.slug}
+                        href={`/team/${team.slug}`}
+                        className="group bg-gray-900/40 p-3 rounded-xl border border-gray-800 hover:border-yellow-500/50 transition-all text-center"
+                      >
+                        {team.imageUrl && (
+                          <img src={team.imageUrl} alt={team.title} className="w-10 h-10 mx-auto mb-2 object-contain" />
+                        )}
+                        <h3 className="text-[10px] font-bold text-white group-hover:text-yellow-400 truncate">
+                          {team.title}
+                        </h3>
+                      </a>
+                    ))}
+                  </div>
+                </section>
+              )}
+
+              {/* World Cup Section */}
+              {wcStages.length > 0 && (
+                <section>
+                  <div className="flex justify-between items-center mb-6">
+                    <h2 className="text-xl font-bold text-yellow-400">World Cup History</h2>
+                  </div>
+                  <div className="grid grid-cols-1 gap-3">
+                    {wcStages.map((stage) => (
+                      <a
+                        key={stage.slug}
+                        href={`/worldcup/${stage.slug}`}
+                        className="group bg-gray-900/40 p-4 rounded-xl border border-gray-800 hover:border-yellow-500/50 transition-all flex items-center justify-between"
+                      >
+                        <div>
+                          <h3 className="text-sm font-bold text-white group-hover:text-yellow-400">
+                            {stage.title}
+                          </h3>
+                          <p className="text-[10px] text-gray-500">{stage.year} - {stage.stage}</p>
+                        </div>
+                        <ChevronRight size={16} className="text-gray-600 group-hover:text-yellow-400" />
+                      </a>
+                    ))}
+                  </div>
+                </section>
+              )}
+            </>
           )}
         </div>
 
