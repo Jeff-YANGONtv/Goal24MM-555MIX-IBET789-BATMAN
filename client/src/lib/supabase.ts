@@ -7,4 +7,8 @@ if (!supabaseUrl || !supabaseAnonKey) {
   console.warn('Missing Supabase environment variables. CMS features will not work.');
 }
 
-export const supabase = createClient(supabaseUrl || '', supabaseAnonKey || '');
+// Provide fallback empty strings to avoid crash, but log error if missing
+const effectiveUrl = supabaseUrl || 'https://placeholder-url.supabase.co';
+const effectiveKey = supabaseAnonKey || 'placeholder-key';
+
+export const supabase = createClient(effectiveUrl, effectiveKey);

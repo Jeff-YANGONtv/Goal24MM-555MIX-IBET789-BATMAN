@@ -70,16 +70,16 @@
         clsObserver.observe({ entryTypes: ['layout-shift'] });
       }
     </script>
-    <!-- Analytics script - only loaded if env variables are defined -->
-    <script>
-      if (typeof %VITE_ANALYTICS_ENDPOINT% !== 'undefined' && typeof %VITE_ANALYTICS_WEBSITE_ID% !== 'undefined') {
+    <!-- Analytics script disabled -->
+    <!-- <script>
+      if (false) {
         const script = document.createElement('script');
         script.defer = true;
         script.src = '%VITE_ANALYTICS_ENDPOINT%/umami';
         script.setAttribute('data-website-id', '%VITE_ANALYTICS_WEBSITE_ID%');
         document.body.appendChild(script);
       }
-    </script>
+    </script> -->
   </body>
 
 </html>
